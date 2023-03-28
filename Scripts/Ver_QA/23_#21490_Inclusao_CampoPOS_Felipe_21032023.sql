@@ -1,0 +1,2 @@
+ALTER TABLE [POS]
+ADD [PosEqBlue] CHAR(1)    NULL

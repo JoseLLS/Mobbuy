@@ -1,0 +1,1 @@
+ALTER TABLE GrupoComercial ALTER COLUMN GrupoComercialNome VARCHAR(50) NOT NULL

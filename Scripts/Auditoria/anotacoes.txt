@@ -1,0 +1,5 @@
+Pasta historico contem alterações feitas durante o ano de 2022 acompanhando a auditoria da pronto
+
+A pasta produção contara a partir de 2023, com ajustes pontuais sendo feitos na rotina, para cada cliente que utiliza
+
+Tera uma pasta para cada cliente, e a cada versão sera criada uma pasta com a respectiva data

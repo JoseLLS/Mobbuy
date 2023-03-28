@@ -1,0 +1,24 @@
+USE PRONTOOUT
+GO
+
+SELECT * FROM MOVTRN01 A 
+WHERE A.MOVTRNNSU = A.MovTrnNsuMovOri
+AND A.MovTrnNsu > 0;
+
+SELECT * FROM VLRPAG WHERE VlpMovTrnId IN (
+SELECT MovTrnId FROM MOVTRN01 A 
+WHERE A.MOVTRNNSU = A.MovTrnNsuMovOri
+AND A.MovTrnNsu > 0
+)
+
+UPDATE VLRPAG SET VlpNsu = VlpNsu + 1 
+WHERE VlpMovTrnId IN (
+SELECT MovTrnId FROM MOVTRN01 A 
+WHERE A.MOVTRNNSU = A.MovTrnNsuMovOri
+AND A.MovTrnNsu > 0
+)
+
+UPDATE MovTrn01 SET MovTrnNsu = MovTrnNsu + 1
+WHERE MovTrnNsu = MovTrnNsuMovOri
+AND MovTrnNsu > 0
+

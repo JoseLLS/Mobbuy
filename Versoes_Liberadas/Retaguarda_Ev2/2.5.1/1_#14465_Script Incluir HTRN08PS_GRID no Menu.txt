@@ -1,0 +1,109 @@
+--PRONTO
+/*
+USE PRONTO
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('HTRN08PS_GRID', 'HTRN08PS_GRID', 'Erro de Importação PS', '', '', 0, 1, '')
+
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'HTRN08PS_GRID', '', 40, 'REDE_CAP', '', '/pronto/servlet/')
+
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (25, 'HTRN08PS_GRID')
+
+SELECT * FROM sse2_mnu02 where MnuIteIde = 'HTRN08PS_GRID' ORDER BY MnuIteIdRoot, MnuIteOrd
+
+--Insere tela no grupo
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (25, 'ADM', 'HTRN08PS_GRID')
+*/
+--BANESE
+/*
+USE BANESE
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('HTRN08PS_GRID', 'HTRN08PS_GRID', 'Erro de Importação PS', '', '', 0, 1, '')
+
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'HTRN08PS_GRID', '', 40, 'REDE_CAP', '', '/banese/servlet/')
+
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (12, 'HTRN08PS_GRID')
+
+SELECT * FROM sse2_mnu02 ORDER BY MnuIteIdRoot, MnuIteOrd
+
+--Insere tela no grupo
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (12, 'ADM', 'HTRN08PS_GRID')
+
+*/
+--BEM FACIL
+/*
+USE BEMFACIL
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('HTRN08PS_GRID', 'HTRN08PS_GRID', 'Erro de Importação PS', '', '', 0, 1, '')
+
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'HTRN08PS_GRID', '', 40, 'REDE_CAP', '', '/bemfacil/servlet/')
+
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (6, 'HTRN08PS_GRID')
+
+SELECT * FROM sse2_mnu02 ORDER BY MnuIteIdRoot, MnuIteOrd
+
+--Insere tela no grupo
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (6, 'ADM', 'HTRN08PS_GRID')
+*/
+--CREDINOV
+/*
+USE CREDINOV
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('HTRN08PS_GRID', 'HTRN08PS_GRID', 'Erro de Importação PS', '', '', 0, 1, '')
+
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'HTRN08PS_GRID', '', 40, 'REDE_CAP', '', '/credinov/servlet/')
+
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (26, 'HTRN08PS_GRID')
+
+SELECT * FROM sse2_mnu02 ORDER BY MnuIteIdRoot, MnuIteOrd
+
+--Insere tela no grupo
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (26, 'ADM', 'HTRN08PS_GRID')
+*/
+--CREDPAG
+/*
+USE CREDPAG
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('HTRN08PS_GRID', 'HTRN08PS_GRID', 'Erro de Importação PS', '', '', 0, 1, '')
+
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'HTRN08PS_GRID', '', 40, 'REDE_CAP', '', '/credpag/servlet/')
+
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (24, 'HTRN08PS_GRID')
+
+SELECT * FROM sse2_mnu02 ORDER BY MnuIteIdRoot, MnuIteOrd
+
+--Insere tela no grupo
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (24, 'ADM', 'HTRN08PS_GRID')
+*/
+--SMARTPAGAMENTOS
+/*
+USE SMARTPAGAMENTOS
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('HTRN08PS_GRID', 'HTRN08PS_GRID', 'Erro de Importação PS', '', '', 0, 1, '')
+
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'HTRN08PS_GRID', '', 40, 'REDE_CAP', '', '/smartpagamentos/servlet/')
+
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (18, 'HTRN08PS_GRID')
+
+SELECT * FROM sse2_mnu02 ORDER BY MnuIteIdRoot, MnuIteOrd
+
+--Insere tela no grupo
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (18, 'ADM', 'HTRN08PS_GRID')
+*/

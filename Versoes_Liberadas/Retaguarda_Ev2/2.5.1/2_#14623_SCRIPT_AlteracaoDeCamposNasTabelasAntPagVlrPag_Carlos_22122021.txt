@@ -1,0 +1,127 @@
+/*ALTERAÇÕES NOS CAMPOS A SEGUIR PARA QUE SEJAM IGUAIS À COLUNA UEstCod DA TABELA USUEST */
+--use BancoOrigem
+/* ALTERA AS COLUNAS AnpUsuSol, AnpUsuInc, AnpUsuAlt, AnpUsuApv DA TABELA AntPag */
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuSol VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuInc VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuApv VARCHAR(128) NULL
+
+/* ALTERA A COLUNA LaaUsuInc DA TABELA LanAnt */
+--ALTER TABLE LanAnt ALTER COLUMN LaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA A COLUNA PaaUsuInc DA TABELA PagAnt */
+--ALTER TABLE PagAnt ALTER COLUMN PaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA AS COLUNAS VlpUsuAlt, VlpUsuInc DA TABELA VlrPag */
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuInc VARCHAR(128) NULL
+
+/***********************************************************************************************************/
+--use Banese
+/* ALTERA AS COLUNAS AnpUsuSol, AnpUsuInc, AnpUsuAlt, AnpUsuApv DA TABELA AntPag */
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuSol VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuInc VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuApv VARCHAR(128) NULL
+
+/* ALTERA A COLUNA LaaUsuInc DA TABELA LanAnt */
+--ALTER TABLE LanAnt ALTER COLUMN LaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA A COLUNA PaaUsuInc DA TABELA PagAnt */
+--ALTER TABLE PagAnt ALTER COLUMN PaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA AS COLUNAS VlpUsuAlt, VlpUsuInc DA TABELA VlrPag */
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuInc VARCHAR(128) NULL
+
+/***********************************************************************************************************/
+--use BemFacil
+/* ALTERA AS COLUNAS AnpUsuSol, AnpUsuInc, AnpUsuAlt, AnpUsuApv DA TABELA AntPag */
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuSol VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuInc VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuApv VARCHAR(128) NULL
+
+/* ALTERA A COLUNA LaaUsuInc DA TABELA LanAnt */
+--ALTER TABLE LanAnt ALTER COLUMN LaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA A COLUNA PaaUsuInc DA TABELA PagAnt */
+--ALTER TABLE PagAnt ALTER COLUMN PaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA AS COLUNAS VlpUsuAlt, VlpUsuInc DA TABELA VlrPag */
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuInc VARCHAR(128) NULL
+
+/***********************************************************************************************************/
+--use CredInov
+/* ALTERA AS COLUNAS AnpUsuSol, AnpUsuInc, AnpUsuAlt, AnpUsuApv DA TABELA AntPag */
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuSol VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuInc VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuApv VARCHAR(128) NULL
+
+/* ALTERA A COLUNA LaaUsuInc DA TABELA LanAnt */
+--ALTER TABLE LanAnt ALTER COLUMN LaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA A COLUNA PaaUsuInc DA TABELA PagAnt */
+--ALTER TABLE PagAnt ALTER COLUMN PaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA AS COLUNAS VlpUsuAlt, VlpUsuInc DA TABELA VlrPag */
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuInc VARCHAR(128) NULL
+
+/***********************************************************************************************************/
+--use CredPag
+/* ALTERA AS COLUNAS AnpUsuSol, AnpUsuInc, AnpUsuAlt, AnpUsuApv DA TABELA AntPag */
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuSol VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuInc VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuApv VARCHAR(128) NULL
+
+/* ALTERA A COLUNA LaaUsuInc DA TABELA LanAnt */
+--ALTER TABLE LanAnt ALTER COLUMN LaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA A COLUNA PaaUsuInc DA TABELA PagAnt */
+--ALTER TABLE PagAnt ALTER COLUMN PaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA AS COLUNAS VlpUsuAlt, VlpUsuInc DA TABELA VlrPag */
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuInc VARCHAR(128) NULL
+
+/***********************************************************************************************************/
+--use pronto
+/* ALTERA AS COLUNAS AnpUsuSol, AnpUsuInc, AnpUsuAlt, AnpUsuApv DA TABELA AntPag */
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuSol VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuInc VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuApv VARCHAR(128) NULL
+
+/* ALTERA A COLUNA LaaUsuInc DA TABELA LanAnt */
+--ALTER TABLE LanAnt ALTER COLUMN LaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA A COLUNA PaaUsuInc DA TABELA PagAnt */
+--ALTER TABLE PagAnt ALTER COLUMN PaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA AS COLUNAS VlpUsuAlt, VlpUsuInc DA TABELA VlrPag */
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuInc VARCHAR(128) NULL
+
+/***********************************************************************************************************/
+--use SmartPagamentos
+/* ALTERA AS COLUNAS AnpUsuSol, AnpUsuInc, AnpUsuAlt, AnpUsuApv DA TABELA AntPag */
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuSol VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuInc VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE AntPag ALTER COLUMN AnpUsuApv VARCHAR(128) NULL
+
+/* ALTERA A COLUNA LaaUsuInc DA TABELA LanAnt */
+--ALTER TABLE LanAnt ALTER COLUMN LaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA A COLUNA PaaUsuInc DA TABELA PagAnt */
+--ALTER TABLE PagAnt ALTER COLUMN PaaUsuInc VARCHAR(128) NULL
+
+/* ALTERA AS COLUNAS VlpUsuAlt, VlpUsuInc DA TABELA VlrPag */
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuAlt VARCHAR(128) NULL
+--ALTER TABLE VlrPag ALTER COLUMN VlpUsuInc VARCHAR(128) NULL
+
+/***********************************************************************************************************/

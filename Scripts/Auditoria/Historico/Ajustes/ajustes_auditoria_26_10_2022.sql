@@ -1,0 +1,73 @@
+USE PRONTOOUT
+GO
+
+--NSU IGUAL O DE ORIGEM
+SELECT * FROM MovTrn01 WHERE MovTrnNsu = MovTrnNsuMovOri AND MovTrnNsu > 0
+
+--AUT COD VAZIO NA MOVTRN E PREENCHIDO NA VLRPAG
+SELECT * FROM MovTrn01 WHERE MovTrnNsu > 0 AND MovTrnAutCodStr = '' AND MovTrnAutCod > 0
+ORDER BY 1
+
+SELECT A.MovTrnId, A.MovTrnNsu, B.VlpNumLan, B.VlpNsu, A.MovTrnAutCod, A.MovTrnAutCodStr, B.VlpAutCodStr,
+A.MovTrnCod, B.VlpTrnCod
+FROM MovTrn01 A
+INNER JOIN VLRPAG B ON A.MovTrnId = B.VlpMovTrnId
+WHERE MovTrnNsu > 0 AND MovTrnAutCodStr = '' AND MovTrnAutCod > 0
+ORDER BY 1
+
+--SELECT A.MovTrnId, A.MovTrnNsu, B.VlpNumLan, B.VlpNsu, A.MovTrnAutCod, A.MovTrnAutCodStr, B.VlpAutCodStr,
+--A.MovTrnCod, B.VlpTrnCod
+
+BEGIN TRAN
+
+UPDATE A SET A.MovTrnAutCodStr = B.VlpAutCodStr
+FROM MovTrn01 A
+INNER JOIN VLRPAG B ON A.MovTrnId = B.VlpMovTrnId
+WHERE MovTrnNsu > 0 AND MovTrnAutCodStr = '' AND MovTrnAutCod > 0
+
+SELECT A.MovTrnId, A.MovTrnNsu, B.VlpNumLan, B.VlpNsu, A.MovTrnAutCod, A.MovTrnAutCodStr, B.VlpAutCodStr,
+A.MovTrnCod, B.VlpTrnCod
+FROM MovTrn01  A WITH(NOLOCK)
+INNER JOIN VLRPAG B WITH(NOLOCK) ON A.MovTrnId = B.VlpMovTrnId
+WHERE MovTrnNsu > 0 AND MovTrnAutCodStr = '' AND MovTrnAutCod > 0
+ORDER BY 1
+
+UPDATE B SET B.VlpNsu = A.MovTrnNsu
+FROM MovTrn01 A
+INNER JOIN VLRPAG B ON A.MovTrnId = B.VlpMovTrnId
+WHERE MovTrnNsu > 0 AND MovTrnAutCodStr = '' AND MovTrnAutCod > 0
+
+COMMIT
+ROLLBACK
+
+
+
+--PRESTAÇÃO DE SERVIÇO
+SELECT * FROM TRN08 A
+INNER JOIN VAN02 B
+ON A.TrnTok = B.VanWbsCupFis AND A.TrnNsu = CONVERT(INT, B.VanWbsNumOpr)
+WHERE TrnVlrTot < TrnVlrTotBru
+
+SELECT * FROM VAN04 WHERE VanTrnSeq IN (
+74692,
+84610
+)
+
+SELECT * FROM MovTrn01 WHERE MovTrnId IN (74995,
+84030)
+
+--ANTECIPACAO
+--DAR UPDATE PARA 1
+SELECT * FROM VLRPAG WHERE VLPSTSPAG = 5
+UPDATE VLRPAG SET VlpStspag = 1 WHERE VLPSTSPAG = 5
+--EXCLUIR
+SELECT * FROM LANANT A
+INNER JOIN VLRPAG B
+ON A.LaaNumLan = B.VlpNumLan
+WHERE AnpNumAnt IN (
+SELECT AnpNumAnt FROM ANTPAG WHERE AnpStsAnt = 2
+) AND VlpStspag <> 2
+
+--ALUGUEL DE POS EM ABERTO PASSA PARA 6
+SELECT * FROM VLRPAG WHERE TidCod = 2 AND VlpStspag = 1
+UPDATE VLRPAG SET VlpStspag = 6 WHERE TidCod = 2 AND VlpStspag = 1

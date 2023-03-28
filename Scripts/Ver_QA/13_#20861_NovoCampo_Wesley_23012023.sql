@@ -1,0 +1,2 @@
+ALTER TABLE [MovTrn01] ADD [MovTrnTxaAntPrv] DECIMAL(17,2)    NULL
+

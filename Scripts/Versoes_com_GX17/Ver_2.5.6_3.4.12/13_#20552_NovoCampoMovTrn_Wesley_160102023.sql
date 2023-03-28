@@ -1,0 +1,2 @@
+ALTER TABLE [MovTrn01]
+ADD [MovTrnTxCobrancaId] VARCHAR(100) NULL

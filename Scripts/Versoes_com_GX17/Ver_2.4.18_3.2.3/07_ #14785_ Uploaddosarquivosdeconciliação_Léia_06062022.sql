@@ -1,0 +1,13 @@
+ALTER TABLE [LogUpdArq]
+ADD [GX_AUX] VARCHAR(250)    NOT NULL CONSTRAINT GX_AUXLogUpdArq_DEFAULT DEFAULT ''
+
+ALTER TABLE [LogUpdArq]
+DROP CONSTRAINT GX_AUXLogUpdArq_DEFAULT
+
+UPDATE [LogUpdArq]
+SET    [GX_AUX] = Rtrim([LogUpdArqNomArq])
+
+ALTER TABLE [LogUpdArq]
+DROP COLUMN [LogUpdArqNomArq]
+
+EXEC sp_rename '[LogUpdArq].GX_AUX', 'LogUpdArqNomArq'

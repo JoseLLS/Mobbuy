@@ -1,0 +1,3 @@
+/* TAREFA #19300 - WESLEY */
+
+CREATE NONCLUSTERED INDEX [UVLRPAG7] ON [VLRPAG] (  [VlpIdCreditTransactionPai])

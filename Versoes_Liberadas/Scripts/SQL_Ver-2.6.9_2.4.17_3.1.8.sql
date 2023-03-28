@@ -1,0 +1,29 @@
+/* TAREFA #14893 - JOSÉ */
+
+USE Pronto --Endereço da Pronto
+
+UPDATE PARSIS
+SET ParCon = 'R JUSSARA, 998'
+WHERE ParCod = 'PDF_ADDRESSLINE1'
+
+UPDATE PARSIS
+SET ParCon = 'JARDIM SANTA CECILIA - BARUERI - SP'
+WHERE ParCod = 'PDF_ADDRESSLINE2'
+
+UPDATE PARSIS
+SET ParCon = 'CEP 06465070'
+WHERE ParCod = 'PDF_ADDRESSLINE3'
+
+USE SmartPagamentos --Endereço da Smart Pagamentos
+
+UPDATE PARSIS
+SET ParCon = 'SCN quadra 1 bloco E sala 517, Ed. Central park'
+WHERE ParCod = 'PDF_ADDRESSLINE1'
+
+UPDATE PARSIS
+SET ParCon = 'Asa norte - Brasilia - DF'
+WHERE ParCod = 'PDF_ADDRESSLINE2'
+
+UPDATE PARSIS
+SET ParCon = 'CEP 70711903'
+WHERE ParCod = 'PDF_ADDRESSLINE3'

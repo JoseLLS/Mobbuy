@@ -1,0 +1,1 @@
+ALTER TABLE [EST] ADD [ESTFlagExtratoFin] BIT NULL

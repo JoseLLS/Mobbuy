@@ -1,0 +1,1 @@
+EST - excluir o campoo EstGruCom e EstGruComNome

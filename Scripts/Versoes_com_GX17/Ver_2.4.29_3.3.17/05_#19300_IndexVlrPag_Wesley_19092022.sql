@@ -1,0 +1,1 @@
+CREATE NONCLUSTERED INDEX [UVLRPAG7] ON [VLRPAG] (  [VlpIdCreditTransactionPai])
