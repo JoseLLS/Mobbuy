@@ -16,6 +16,7 @@ NaoIncluir = []
 # Configura as exceções
 NaoIncluir.append(os.path.join(diretorioApp, "logs"))
 NaoIncluir.append(os.path.join(diretorioApp, "PublicTempStorage"))
+NaoIncluir.append(os.path.join(diretorioApp, "WEB-INF", "PDFReport.ini"))
 NaoIncluir.append(os.path.join(diretorioApp, "WEB-INF", "CloudServices.config"))
 NaoIncluir.append(os.path.join(diretorioApp, "WEB-INF", "classes", "log4j2.xml"))
 NaoIncluir.append(os.path.join(diretorioApp, "WEB-INF", "classes", "client.cfg"))
