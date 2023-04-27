@@ -1,7 +1,23 @@
+ALTER view [dbo].[AgdRec01] as
+select
+AgdRc1Dta = v.VlrDtaPrvLiqAnt ,
+AgdRc1Movtrnid  = m.MovTrnId,
+AgdRc1VlrDeb = sum( case when isnull(MovTrnCod,'') IN ('CV','PS') and isnull(MovTrnTipPrd,'')='D' and isnull(MovTrnParQtd,'') <= 1 then VlrVlrRec Else 0 end ) ,
+AgdRc1VlrCre = sum( case when isnull(MovTrnCod,'') IN ('CV','PS') and isnull(MovTrnTipPrd,'')='C' and isnull(MovTrnParQtd,'') <= 1 then VlrVlrRec Else 0 end ),
+AgdRc1VlrPrc = sum( case when isnull(MovTrnCod,'') IN ('CV','PS') and isnull(MovTrnTipPrd,'')='C' and isnull(MovTrnParQtd,'') >  1 then VlrVlrRec Else 0 end ),
+AgdRc1VlrAju = sum( case when isnull(MovTrnCod,'') = 'AJ'then VlrVlrRec Else 0 end ),
+AgdRc1VlrCan = sum( case when isnull(MovTrnCod,'') = 'CC'then VlrVlrRec Else 0 end ),
+AgdRc1VlrOut = sum( case when isnull(MovTrnCod,'') = ''  then VlrVlrRec Else 0 end ),
+AgdRc1VlrPix = sum( case when MovTrnTipPrd = 'P'  then VlrVlrRec Else 0 end )
+from vlrrec v left join movtrn01 m on (m.movtrnid =  v.VlrMovTrnId ) where v.VlrStsRec not in (4,5)
+group by v.VlrDtaPrvLiqAnt,m.MovTrnId;
+
+
 ALTER VIEW [dbo].[AgdRec02] as 
 	select 
 		AgdRc1Dta = v.VlrDtaPrvLiqAnt ,
 		EstCod    = v.EstCod ,
+		AgdRc2Movtrnid  = m.MovTrnId,
 		AgdRc2VlrDeb = sum( case when isnull(MovTrnCod,'')='CV' and isnull(MovTrnTipPrd,'')='D' and isnull(MovTrnParQtd,'') <= 1 then VlrVlrRec Else 0 end ) ,
 		AgdRc2VlrCre = sum( case when isnull(MovTrnCod,'')='CV' and isnull(MovTrnTipPrd,'')='C' and isnull(MovTrnParQtd,'') <= 1 then VlrVlrRec Else 0 end ),
 		AgdRc2VlrPrc = sum( case when isnull(MovTrnCod,'')='CV' and isnull(MovTrnTipPrd,'')='C' and isnull(MovTrnParQtd,'') >  1 then VlrVlrRec Else 0 end ),
@@ -10,13 +26,13 @@ ALTER VIEW [dbo].[AgdRec02] as
 		AgdRc2VlrOut = sum( case when isnull(MovTrnCod,'')=''  then VlrVlrRec Else 0 end ),
 		AgdPc2VlrPix = sum( case when m.MovTrnTipPrd ='P'  then VlrVlrRec Else 0 end)
 from vlrrec v left join movtrn01 m on (m.movtrnid =  v.VlrMovTrnId ) where v.VlrStsRec not in (4,5) 
-	group by v.VlrDtaPrvLiqAnt , v.estcod;
-	
-	
-CREATE VIEW [dbo].[AgdRec03] as 
+	group by v.VlrDtaPrvLiqAnt , v.estcod, m.MovTrnId;
+		
+CREATE view [dbo].[AgdRec03] as 
 	select 
 		AgdRc1Dta 		= v.VlrDtaPrvLiqAnt ,
 		AdqCod	  		= m.AdqCod, 
+		AgdRc3Movtrnid  = m.MovTrnId,
 		AgdRc3VlrDeb 	= sum( case when isnull(MovTrnCod,'')='CV' and isnull(MovTrnTipPrd,'')='D' and isnull(MovTrnParQtd,'') <= 1 then VlrVlrRec Else 0 end ) ,
 		AgdRc3VlrCre 	= sum( case when isnull(MovTrnCod,'')='CV' and isnull(MovTrnTipPrd,'')='C' and isnull(MovTrnParQtd,'') <= 1 then VlrVlrRec Else 0 end ),
 		AgdRc3VlrPrc 	= sum( case when isnull(MovTrnCod,'')='CV' and isnull(MovTrnTipPrd,'')='C' and isnull(MovTrnParQtd,'') >  1 then VlrVlrRec Else 0 end ),
@@ -26,6 +42,6 @@ CREATE VIEW [dbo].[AgdRec03] as
 		AgdPc3VlrPix 	= sum( case when m.MovTrnTipPrd ='P'  then VlrVlrRec Else 0 end)
 from vlrrec v inner join movtrn01 m on (m.movtrnid =  v.VlrMovTrnId ) 
 inner join ADQ0001 a
-on (a.AdqCod = m.AdqCod )
+on (a.AdqCod = m.AdqCod)
 where v.VlrStsRec not in (4,5) 
-group by v.VlrDtaPrvLiqAnt , m.AdqCod;
+group by v.VlrDtaPrvLiqAnt , m.AdqCod, m.MovTrnId;
