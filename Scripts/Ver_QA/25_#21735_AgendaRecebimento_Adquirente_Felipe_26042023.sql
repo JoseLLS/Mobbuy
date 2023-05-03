@@ -42,3 +42,94 @@ inner join ADQ0001 a
 on (a.AdqCod = m.AdqCod)
 where v.VlrStsRec not in (4,5) 
 group by v.VlrDtaPrvLiqAnt , m.AdqCod;
+
+
+
+
+
+-- dbo.View0002 source
+
+ALTER VIEW [dbo].[View0002]
+AS
+SELECT
+dbo.VLRREC.VlrNumLan,
+iif(dbo.MovTrn01.MovTrnId is null, 0, dbo.MovTrn01.MovTrnId) as 
+'MovTrnId',
+iif(dbo.MovTrn01.EstCod is null, 0, dbo.MovTrn01.EstCod) as 'EstCod',
+iif(dbo.MovTrn01.MovTrnCod is null, '', dbo.MovTrn01.MovTrnCod) as 
+'MovTrnCod',
+iif(dbo.MovTrn01.MovTrnNsu is null, 0, dbo.MovTrn01.MovTrnNsu) as 
+'MovTrnNsu',
+iif(dbo.MovTrn01.MovTrnAutCod is null, 0, dbo.MovTrn01.MovTrnAutCod) as 'MovTrnAutCod',
+isnull(dbo.MovTrn01.MovTrnAutCodStr,'') as MovTrnAutCodStr ,
+iif(dbo.MovTrn01.MovTrnNsuMovOri is null, 0, 
+dbo.MovTrn01.MovTrnNsuMovOri) as 'MovTrnNsuMovOri',
+iif(dbo.MovTrn01.MovTrnDta is null, '01-01-1753', 
+dbo.MovTrn01.MovTrnDta) as 'MovTrnDta',
+iif(dbo.MovTrn01.MovTrnVlr is null, 0, dbo.MovTrn01.MovTrnVlr) as 
+'MovTrnVlr',
+iif(dbo.MovTrn01.MovTrnVlrLiqBemFac is null, 0, 
+dbo.MovTrn01.MovTrnVlrLiqBemFac) as 'MovTrnVlrLiqBemFac',
+iif(dbo.MovTrn01.MovTrnVlrLiqEst is null, 0, 
+dbo.MovTrn01.MovTrnVlrLiqEst) as 'MovTrnVlrLiqEst',
+iif(dbo.MovTrn01.MovTrnParQtd is null, 0, 
+dbo.MovTrn01.MovTrnParQtd) as 'MovTrnParQtd',
+iif(dbo.MovTrn01.MovTrnParVlr is null, 0, 
+dbo.MovTrn01.MovTrnParVlr) as 'MovTrnParVlr',
+iif(dbo.MovTrn01.MovTrnBfaVlrTxaAnt is null, 0, 
+dbo.MovTrn01.MovTrnBfaVlrTxaAnt) as 'MovTrnBfaVlrTxaAnt',
+iif(dbo.MovTrn01.MovTrnBfaVlrTarCre is null, 0, 
+dbo.MovTrn01.MovTrnBfaVlrTarCre) as 'MovTrnBfaVlrTarCre',
+iif(dbo.MovTrn01.MovTrnBfaVlrCusTrn is null, 0, 
+dbo.MovTrn01.MovTrnBfaVlrCusTrn) as 'MovTrnBfaVlrCusTrn',
+iif(dbo.MovTrn01.MovTrnBfaVlrTxaFin is null, 0, 
+dbo.MovTrn01.MovTrnBfaVlrTxaFin) as 'MovTrnBfaVlrTxaFin',
+iif(dbo.MovTrn01.MovTrnBfaVlrTxaAdm is null, 0, 
+dbo.MovTrn01.MovTrnBfaVlrTxaAdm) as 'MovTrnBfaVlrTxaAdm',
+iif(dbo.MovTrn01.MovTrnBfaVlrCusCap is null, 0, 
+dbo.MovTrn01.MovTrnBfaVlrCusCap) as 'MovTrnBfaVlrCusCap',
+iif(dbo.MovTrn01.MovTrnGbpVlrTxaAnt is null, 0, 
+dbo.MovTrn01.MovTrnGbpVlrTxaAnt) as 'MovTrnGbpVlrTxaAnt',
+iif(dbo.MovTrn01.MovTrnGbpVlrTxaInt is null, 0, 
+dbo.MovTrn01.MovTrnGbpVlrTxaInt) as 'MovTrnGbpVlrTxaInt',
+iif(dbo.MovTrn01.MovTrnGbpVlrTxaAdm is null, 0, 
+dbo.MovTrn01.MovTrnGbpVlrTxaAdm) as 'MovTrnGbpVlrTxaAdm',
+iif(dbo.MovTrn01.MovTrnTipPrd is null, '', 
+dbo.MovTrn01.MovTrnTipPrd) as 'MovTrnTipPrd',
+iif(dbo.VLRREC.VlrDtaPrvLiqAnt is null, '01-01-1753', 
+dbo.VLRREC.VlrDtaPrvLiqAnt) as 'VlrDtaPrvLiqAnt',
+iif(dbo.VLRREC.VlrVlrRec is null, 0, dbo.VLRREC.VlrVlrRec) as 
+'VlrVlrRec',
+iif(dbo.VLRREC.VlrDtaLiqBco is null, '01-01-1753', 
+dbo.VLRREC.VlrDtaLiqBco) as 'VlrDtaLiqBco',
+iif(dbo.VLRREC.VlrVlrLiqBco is null, 0, dbo.VLRREC.VlrVlrLiqBco) as 
+'VlrVlrLiqBco',
+iif(dbo.VLRREC.VlrStsRec is null, 0, dbo.VLRREC.VlrStsRec) as 
+'VlrStsRec',
+iif(dbo.VLRREC.VlrCcoRcc is null, 0, dbo.VLRREC.VlrCcoRcc) as 
+'VlrCcoRcc',
+iif(dbo.VLRREC.VlrAgeRcc is null, 0, dbo.VLRREC.VlrAgeRcc) as 
+'VlrAgeRcc',
+iif(dbo.VLRREC.VlrBcoRcc is null, 0, dbo.VLRREC.VlrBcoRcc) as 
+'VlrBcoRcc',
+iif(dbo.MovTrn01.MovTrnParIndBemFac is null, '', 
+dbo.MovTrn01.MovTrnParIndBemFac) as 'MovTrnParIndBemFac' ,
+BanCod = isnull( MovTrnBan , '' ) ,
+
+PrvTrnMov = isnull(VlrNumMovPrv , 0 ) ,
+PrvTrnReg = isnull(VlrNumRegPrv , 0 ) ,
+
+LiqTrnMov = isnull(VlrNumMovLiq , 0 ) ,
+LiqTrnReg = isnull(VlrNumRegLiq , 0 ) ,
+CanTrnMov = isnull(VlrNumMovCan , 0 ) ,
+CanTrnReg = isnull(VlrNumRegCan , 0 ) ,
+MovTrnPacCod = isnull( MovTrnPacCod , 0 ),
+AdqCod		= isnull(AdqCod, 0),
+AdqNom		= isnull(AdqNom, 0),
+VlrVlrBru	= isnull(VlrVlrBru)
+FROM
+dbo.VLRREC
+LEFT JOIN
+dbo.MovTrn01 ON dbo.VLRREC.VlrMovTrnId = dbo.MovTrn01.MovTrnId;
+LEFT JOIN 
+dbo.ADQ0001 ON dbo.ADQ0001.AdqCod = dbo.MovTrn01.AdqCod;
