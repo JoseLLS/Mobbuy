@@ -124,8 +124,8 @@ LiqTrnReg = isnull(VlrNumRegLiq , 0 ) ,
 CanTrnMov = isnull(VlrNumMovCan , 0 ) ,
 CanTrnReg = isnull(VlrNumRegCan , 0 ) ,
 MovTrnPacCod = isnull( MovTrnPacCod , 0 ),
-AdqCod		= isnull(AdqCod, 0),
-AdqNom		= isnull(AdqNom, 0),
+AdqCod		= ADQ0001.AdqCod,
+AdqNom		= ADQ0001.AdqNom,
 VlrVlrBru	= isnull(VlrVlrBru)
 FROM
 dbo.VLRREC
