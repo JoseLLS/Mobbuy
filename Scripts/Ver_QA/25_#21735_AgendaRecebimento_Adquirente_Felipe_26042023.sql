@@ -126,10 +126,11 @@ CanTrnReg = isnull(VlrNumRegCan , 0 ) ,
 MovTrnPacCod = isnull( MovTrnPacCod , 0 ),
 AdqCod		= ADQ0001.AdqCod,
 AdqNom		= ADQ0001.AdqNom,
-VlrVlrBru	= isnull(VlrVlrBru)
+VlrVlrBru	= VlrVlrBru,
+VlrParNum	= VlrParNum
 FROM
 dbo.VLRREC
 LEFT JOIN
-dbo.MovTrn01 ON dbo.VLRREC.VlrMovTrnId = dbo.MovTrn01.MovTrnId;
+dbo.MovTrn01 ON dbo.VLRREC.VlrMovTrnId = dbo.MovTrn01.MovTrnId
 LEFT JOIN 
 dbo.ADQ0001 ON dbo.ADQ0001.AdqCod = dbo.MovTrn01.AdqCod;
