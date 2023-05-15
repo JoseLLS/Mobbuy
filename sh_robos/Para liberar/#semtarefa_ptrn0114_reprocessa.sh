@@ -23,7 +23,7 @@ fi
 date >> /mnt/home1/sistema/logs/$TASK.lock
 
 cd $PATHCLASSES
-$PATHJAVA $TEXTCLASSPATH $PROCESS3 >> /mnt/home1/sistema/logs/$TASK.txt
+$PATHJAVA $TEXTCLASSPATH $PROCESS3 "$1" >> /mnt/home1/sistema/logs/$TASK.txt
 
 if [ -f /mnt/home1/sistema/logs/$TASK.lock ]
 then
