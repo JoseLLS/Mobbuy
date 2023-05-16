@@ -1,6 +1,8 @@
 /* TAREFA #21834 */
 
 --Script da base Retaguarda
+DROP INDEX [UVAN042] ON [VAN04];
+
 CREATE NONCLUSTERED INDEX [UVAN042] ON [VAN04] (
       [VanTrnDta],
       [VanTrnExpVerNova]);
