@@ -1,3 +1,5 @@
+/* TAREFA #22067 - JOSÉ */
+
 USE Banese;
 
 INSERT INTO PARSIS
