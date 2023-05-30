@@ -1,0 +1,7 @@
+/* SEM TAREFA - JOSÉ */
+
+USE Seguranca;
+
+CREATE NONCLUSTERED INDEX [USESSION1] ON [GAM].[Session] ([UserGUID]);
+
+DELETE FROM [GAM].[Session];
