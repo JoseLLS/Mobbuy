@@ -3,7 +3,7 @@
 #ToDo: Testar usar a mesma var de 'resposta'.
 #ToDo: usar unzip -o (overwrite).
 
-caminhoFix=/home/joseluiz/fix/fix7/autofix.zip
+caminhoFix=/home/lsantos/fix/fix7/autofix.zip
 
 clear
 echo "Maravilha, é hora de atualizar o FIX!"
@@ -38,6 +38,16 @@ if echo "$resposta" | grep -iq "^s" ;then
 			echo "Atualizando credinov"
 			unzip -o $caminhoFix -d /opt/apache-tomcat-9.0.46/webapps/credinov-v17up8/	
 			sudo curl -u admin:MobPwd@12345 http://localhost:8089/manager/text/reload?path=/credinov-v17up8	
+		fi
+		
+		if (echo "$respostaT" | grep -iq "^01$") || (echo "$respostaT" | grep -iq "^00$") ;then
+			echo ""
+			echo "Realizando Backup estbank"	
+      rm -rf  /opt/apache-tomcat-9.0.46/Backup/estbank-v17up8												
+			cp -fR /opt/apache-tomcat-9.0.46/webapps/estbank-v17up8/ /opt/apache-tomcat-9.0.46/Backup/			
+			echo "Atualizando estbank"
+			unzip -o $caminhoFix -d /opt/apache-tomcat-9.0.46/webapps/estbank-v17up8/	
+			sudo curl -u admin:MobPwd@12345 http://localhost:8089/manager/text/reload?path=/estbank-v17up8	
 		fi
 
 		if (echo "$respostaT" | grep -iq "^02$") || (echo "$respostaT" | grep -iq "^00$") ;then
