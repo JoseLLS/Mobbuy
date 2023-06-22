@@ -10,6 +10,7 @@ END
 
 create view VwPOSHist as
 select 
+		VwPOSHistId			= NewID(),
 		VwPhPosNum 			= POS.PosNum, 
 		VwPhPosNumSer		= POS.PosNumSer,
 		VwPhPosEstCod		= POS.PosEstCod, 
