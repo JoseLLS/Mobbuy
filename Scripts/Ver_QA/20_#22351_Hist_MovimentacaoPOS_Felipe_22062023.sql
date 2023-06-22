@@ -1,4 +1,4 @@
-use pronto
+USE pronto
 
 CREATE FUNCTION GetEst(@InEstCod INT)         
     RETURNS  Varchar(100) 
@@ -8,8 +8,8 @@ CREATE FUNCTION GetEst(@InEstCod INT)
     RETURN @nome; 
 END 
 
-create view VwPOSHist as
-select 
+CREATE VIEW VwPOSHist as
+SELECT 
 		VwPOSHistId			= NewID(),
 		VwPhPosNum 			= POS.PosNum, 
 		VwPhPosNumSer		= POS.PosNumSer,
@@ -21,6 +21,7 @@ select
 		VwPhPosRedOpe		= POS.PosRedOpe,
 		VwPhPosDscDst		= POS.PosDscDst,
 		VwPhHipNumSeq		= HISPOS.HipNumSeq,
+		VwPhHipEstCod		= Est.EstCod,
 		VwPhHipEstRazSoc	= Est.EstRazSoc,
 		VwPhHipEstSegmento 	= Est.EstSegmento, 
 		VwPhHipDtaEnv		= HISPOS.HipDtaEnv,
@@ -28,10 +29,10 @@ select
 		VwPhHipDtaDev		= HISPOS.HipDtaDev,  
 		VwPhHipCodMotDev	= HISPOS.HipCodMotDev,
 		VwPhHipDscMotDev	= HISPOS.HipDscMotDev
-from POS
-left join HISPOS 
-on HISPOS.HipNumPos = POS.PosNum 
-left join ETQ 
-on ETQ.EtqCodItm = POS.EtqCodItm
-left join EST
-on EST.EstCod = HISPOS.HipCodEst
+FROM POS
+LEFT JOIN HISPOS 
+ON HISPOS.HipNumPos = POS.PosNum 
+LEFT JOIN ETQ 
+ON ETQ.EtqCodItm = POS.EtqCodItm
+LEFT JOIN EST
+ON EST.EstCod = HISPOS.HipCodEst
