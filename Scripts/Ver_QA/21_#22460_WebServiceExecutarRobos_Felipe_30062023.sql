@@ -1,0 +1,5 @@
+CREATE TABLE [LISTAJOBS] (
+  [IDJOB]        SMALLINT    NOT NULL    IDENTITY ( 1 , 1 ),
+  [JOBDescricao] VARCHAR(100)    NULL,
+  [JOBChave]     VARCHAR(200)    NULL,
+PRIMARY KEY ( [IDJOB] ))
