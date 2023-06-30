@@ -1,0 +1,7 @@
+/* TAREFA #22463 - LEONARDO */
+
+use EstBank
+go
+
+ALTER TABLE [VAN02]
+ADD [VanWbsIdCliente] VARCHAR(40)    NULL
