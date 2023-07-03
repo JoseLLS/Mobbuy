@@ -28,3 +28,16 @@ CREATE NONCLUSTERED INDEX [IPOS6] ON [POS] (
       [MotDevId])
 ALTER TABLE [POS]
  ADD CONSTRAINT [IPOS6] FOREIGN KEY ( [MotDevId] ) REFERENCES [MotDev]([MotDevId])
+
+--Inserir esse registro primeiro
+INSERT INTO MotDev
+(MotDevDesc)
+values
+(N'Problema Técnico');
+
+
+INSERT INTO MotDev
+(MotDevDesc)
+values
+(N'Sem Utilização');
+
