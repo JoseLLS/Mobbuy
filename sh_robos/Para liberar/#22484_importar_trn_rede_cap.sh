@@ -2,4 +2,10 @@ CLASSPATH="../lib/activation-1.1.jar:../lib/annotations-api.jar:../lib/asm-3.1.j
 
 cd /usr/local/tomcat/webapps/pronto/WEB-INF/classes
 
-/usr/local/openjdk-8/bin/java -classpath $CLASSPATH transacoesgateway_insere "$1" "$2"  >> /mnt/home1/sistema/logs/transacoesgateway_pronto.txt
+/usr/local/openjdk-8/bin/java -classpath $CLASSPATH van0208  >> /mnt/home1/sistema/logs/importar_trn_pronto.txt
+
+/usr/local/openjdk-8/bin/java -classpath $CLASSPATH ptrn0700 >> /mnt/home1/sistema/logs/importar_trn_pronto.txt
+
+/usr/local/openjdk-8/bin/java -classpath $CLASSPATH ptrn0700_gateway >> /mnt/home1/sistema/logs/importar_trn_pronto.txt
+
+/usr/local/openjdk-8/bin/java -classpath $CLASSPATH ajustacancelamento >> /mnt/home1/sistema/logs/importar_trn_pronto.txt
