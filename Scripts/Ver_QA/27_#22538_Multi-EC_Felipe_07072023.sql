@@ -1,0 +1,3 @@
+ALTER TABLE [POS]
+ADD [PosNumMultiECPai] INT    NULL,
+    [PosMultiEC] SMALLINT    NULL
