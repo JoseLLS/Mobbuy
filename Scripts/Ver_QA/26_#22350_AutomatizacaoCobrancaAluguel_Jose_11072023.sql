@@ -26,6 +26,7 @@ CREATE TABLE [AlugParm] (
   [AlugParmId]      SMALLINT    NOT NULL    IDENTITY ( 1 , 1 ),
   [AlugParmDtaVct]  SMALLINT    NULL,
   [AlugParmDiasCar] SMALLINT    NULL,
+  [AlugParmDiasInat] SMALLINT    NULL,
      PRIMARY KEY ( [AlugParmId] ))
 
 
