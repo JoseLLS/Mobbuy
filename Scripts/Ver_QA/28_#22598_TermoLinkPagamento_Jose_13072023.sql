@@ -1,0 +1,5 @@
+/* TAREFA #22598 - JOSÉ */
+
+INSERT INTO TERMO
+VALUES('LINKPAG', '<p>Declaro conhecimento e aceito as condições e requisitos aplicáveis aos procedimentos de contestação (chargeback), conforme disciplinadas nos Termos e Condições Pronto. Confirmo minha ciência de que, para transações não presenciais, via cartão (via link de pagamento), limitado ao valor de R$ 10.000,00, a abertura de qualquer procedimento de chargeback estará condicionada à apresentação dos seguintes documentos, sem prejuízo de outros porventura solicitados:&nbsp;<strong>a) Carta de débito; b) Nota Fiscal do pedido; c) comprovante de entrega da mercadoria</strong>. Manifesto ciência inequívoca de que a abertura de procedimento de chargeback não garante qualquer estorno ou o reembolso, total ou parcial, dos valores contestados.</p>',
+'2023-07-13 00:00:00.000', '1753-01-01 00:00:00.000', '025MJOSE', '', '2023-07-13 11:56:00.000', '1753-01-01 00:00:00.000', 1, 'Termo de Link de Pagamento')
