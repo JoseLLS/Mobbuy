@@ -192,6 +192,7 @@ INSERT INTO #_ConcResultadosCessao
 SELECT DT.DataTemp,
 COALESCE(CASE
 	WHEN (A.ValorCessaoMobPed = B.ValorCessaoAPIPed) AND (C.ValorCessaoMobPago = D.ValorCessaoAPIPago) THEN 'OK'
+	WHEN (A.ValorCessaoMobPed IS NULL AND B.ValorCessaoAPIPed IS NULL AND C.ValorCessaoMobPago IS NULL AND D.ValorCessaoAPIPago IS NULL) THEN 'OK'
 ELSE 'NOK'
 END, 'OK')
 FROM #_DataTemporaria DT
