@@ -202,6 +202,7 @@ LEFT JOIN (
 	FROM Cessao
 	WHERE CONVERT(DATE, CessaoDtalIQ) BETWEEN @DATAINI AND @DATAFIM 
 	AND CessaoStatusId = 1
+	GROUP BY CONVERT(DATE, CessaoDtalIQ)
 ) A
 ON DT.DataTemp = A.DataMobPed
 LEFT JOIN (
@@ -212,6 +213,7 @@ LEFT JOIN (
 	WHERE CONVERT(DATE, CessaoDtalIQ) BETWEEN @DATAINI AND @DATAFIM 
 	AND CessaoStatusId = 1
 	AND CessaoNFDistribuidora <> ''
+	GROUP BY CONVERT(DATE, CessaoDtalIQ)
 ) B
 ON DT.DataTemp = B.DataAPIPed
 LEFT JOIN (
@@ -221,6 +223,7 @@ LEFT JOIN (
 	FROM Cessao
 	WHERE CONVERT(DATE, CessaoDtalIQ) BETWEEN @DATAINI AND @DATAFIM 
 	AND CessaoStatusId = 1
+	GROUP BY CONVERT(DATE, CessaoDtalIQ)
 ) C
 ON DT.DataTemp = C.DataMobPago
 LEFT JOIN (
@@ -231,6 +234,7 @@ LEFT JOIN (
 	WHERE CONVERT(DATE, CessaoDtalIQ) BETWEEN @DATAINI AND @DATAFIM 
 	AND CessaoStatusId = 1
 	AND CessaoNFDistribuidora <> ''
+	GROUP BY CONVERT(DATE, CessaoDtalIQ)
 ) D
 ON DT.DataTemp = D.DataAPIPago
 
@@ -257,5 +261,3 @@ ON A.ConcResultadosData = C.ConcResultadosData
 END
 
 GO
-
-
