@@ -310,7 +310,8 @@ LEFT JOIN (
 	MovTrnDta
 	FROM MovTrn01
 	WHERE MovTrnDta BETWEEN @DATAINI AND @DATAFIM
-	AND MovTrnCod in ('CV', 'PS')
+	AND MovTrnCod = 'CV'
+	AND MovTrnEstTxaAntPrv = 0
 	GROUP BY MovTrnDta
 ) C
 ON A.MovTrnDta = C.MovTrnDta
@@ -319,7 +320,8 @@ LEFT JOIN (
 	MovTrnDta
 	FROM MovTrn01
 	WHERE MovTrnDta BETWEEN @DATAINI AND @DATAFIM
-	AND MovTrnCod in ('CV', 'PS')
+	AND MovTrnCod = 'CV'
+	AND MovTrnEstTxaAntPrv = 0
 	GROUP BY MovTrnDta
 ) D
 ON A.MovTrnDta = D.MovTrnDta
