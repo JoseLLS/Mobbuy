@@ -1,3 +1,8 @@
 ALTER TABLE [POS]
 ADD [PosNumMultiECPai] INT    NULL,
     [PosMultiEC] SMALLINT    NULL
+	
+	
+DROP INDEX [IPOS5] ON [POS]
+CREATE NONCLUSTERED INDEX [IPOS5] ON [POS] (
+      [PosNumSer])
