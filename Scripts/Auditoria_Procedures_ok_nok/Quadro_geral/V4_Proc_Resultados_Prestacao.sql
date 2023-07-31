@@ -404,7 +404,7 @@ INSERT INTO ConcResultados
 	ConcResultadosPrestServ,
 	ConcResultadosVendas
 )
-SELECT A.ConcResultadosData, 'OK', 'OK', B.ConcResultadosAntecip, 'OK', C.ConcResultadosCessao, ConcResultadosMDR, 'OK', 'OK', A.ConcResultadosVendas
+SELECT A.ConcResultadosData, 'OK', 'OK', B.ConcResultadosAntecip, 'OK', C.ConcResultadosCessao, ConcResultadosMDR, 'OK', E.ConcResultadosPs, A.ConcResultadosVendas
 FROM #_ConcResultadosVendas A
 LEFT JOIN #_ConcResultadosAntecip B
 ON A.ConcResultadosData = B.ConcResultadosData
@@ -412,6 +412,8 @@ LEFT JOIN #_ConcResultadosCessao C
 ON A.ConcResultadosData = C.ConcResultadosData
 LEFT JOIN #_ConcResultadosMDR D
 ON A.ConcResultadosData = D.ConcResultadosData
+LEFT JOIN #_ConcResultadosPs E
+ON A.ConcResultadosData = E.ConcResultadosData
 
 END
 
