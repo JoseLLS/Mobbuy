@@ -1,4 +1,7 @@
-INSERT INTO PARSIS 
-(ParCod, ParDsc, ParTipPar, ParTamPar, ParIndSin, ParCon)
-VALUES
-('CALCULA_TAXANTPRV', 'Cliente poderá ter o calculo da taxa de antecipação prevista calculada ?', 'CA', 80, 'N', 'S')
+INSERT INTO PARSIS
+VALUES ('VER_SQL_RET', 'Versão do sistema Retaguarda do último script SQL executado', 'CA', 20, NULL, 'N', '', 'JOSE', 
+'2023-08-03 12:15:00.000', NULL, NULL, 0)
+
+INSERT INTO PARSIS
+VALUES ('VER_SQL_LOJ', 'Versão do sistema Retaguarda do último script SQL executado', 'CA', 20, NULL, 'N', '', 'JOSE', 
+'2023-08-03 12:15:00.000', NULL, NULL, 0)
