@@ -1,0 +1,17 @@
+USE PRONTO
+GO
+
+SELECT SUM(Valor) FROM (
+SELECT VanWbsNsu, VanWbsAtz, (CONVERT(NUMERIC(17,2), IIF(VanWbsSta LIKE '%CONFIRMADA%', VanWbsVlr, VanWbsVlr *-1)/100)) 'Valor'
+FROM VAN02
+WHERE VanWbsDat = '20230601'
+AND VanWbsSta <> 'NEGADA') A
+
+SELECT SUM(MovTrnVlr) FROM MovTrn01
+WHERE MovTrnDta = '20230601'
+
+SELECT * FROM TrnPagSeg
+WHERE TrnPagSegDataVendaAjuste = '2023-06-01'
+
+SELECT * FROM TRN05 
+WHERE TrnBrsOprOriDat = '20230601'

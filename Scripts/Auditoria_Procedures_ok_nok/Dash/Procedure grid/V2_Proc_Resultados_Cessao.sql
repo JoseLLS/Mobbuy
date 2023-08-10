@@ -9,6 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
+
 ALTER PROCEDURE [dbo].[ConcResultadosLoop](@DATAINI DATE, @DATAFIM DATE)
 AS
 BEGIN
@@ -48,6 +49,12 @@ CREATE TABLE #_ConcResultadosAntecip
 	ConcResultadosAntecip VARCHAR(5)
 )
 
+CREATE TABLE #_ConcResultadosCessao 
+(	
+	ConcResultadosData Date,
+	ConcResultadosCessao VARCHAR(5)
+)
+
 DELETE FROM ConcResultados
 
 INSERT INTO #_ConcResultadosVendas
@@ -56,14 +63,14 @@ INSERT INTO #_ConcResultadosVendas
 	ConcResultadosVendas
 )
 
-SELECT A.DataTemp,
+SELECT DT.DataTemp,
 CASE
 	WHEN (MOB.ValorMob = ADQ.ValorAdq AND Mob.ValorMob = Sitef.ValorSitef)  THEN 'OK'
 	WHEN (MOB.ValorMob IS NULL AND ADQ.ValorAdq IS NULL AND Sitef.ValorSitef IS NULL)  THEN 'OK'
 	ELSE 'NOK'
 END
 FROM
-#_DataTemporaria A
+#_DataTemporaria DT
 LEFT JOIN
 (
 	SELECT COALESCE(SUM(MovTrnVlr),0) 'ValorMob', MovTrnDta 
@@ -73,7 +80,7 @@ LEFT JOIN
 	AND MovTrnTipPrd <> 'P'
 	GROUP BY MovTrnDta
 ) Mob
-ON A.DataTemp = Mob.MovTrnDta
+ON DT.DataTemp = Mob.MovTrnDta
 LEFT JOIN 
 (
 	SELECT COALESCE(SUM(ValorTrn),0) 'ValorSitef', VanWbsDat FROM (
@@ -181,6 +188,57 @@ AND D.ArbDetCodSit IN (0, 4)
 GROUP BY CONVERT(DATE, AnpDtiApv)) B
 ON A.DataAprov = B.DataAprov
 
+INSERT INTO #_ConcResultadosCessao
+SELECT DT.DataTemp,
+COALESCE(CASE
+	WHEN (A.ValorCessaoMobPed = B.ValorCessaoAPIPed) AND (C.ValorCessaoMobPago = D.ValorCessaoAPIPago) THEN 'OK'
+	WHEN (A.ValorCessaoMobPed IS NULL AND B.ValorCessaoAPIPed IS NULL AND C.ValorCessaoMobPago IS NULL AND D.ValorCessaoAPIPago IS NULL) THEN 'OK'
+ELSE 'NOK'
+END, 'OK')
+FROM #_DataTemporaria DT
+LEFT JOIN (
+	SELECT
+	CONVERT(DATE, CessaoDtalIQ) 'DataMobPed',
+	COALESCE(SUM(CessaoValor), 0) 'ValorCessaoMobPed'	
+	FROM Cessao
+	WHERE CONVERT(DATE, CessaoDtalIQ) BETWEEN @DATAINI AND @DATAFIM 
+	AND CessaoStatusId = 1
+	GROUP BY CONVERT(DATE, CessaoDtalIQ)
+) A
+ON DT.DataTemp = A.DataMobPed
+LEFT JOIN (
+	SELECT
+	CONVERT(DATE, CessaoDtalIQ) 'DataAPIPed',
+	COALESCE(SUM(CessaoValor), 0) 'ValorCessaoAPIPed'	
+	FROM Cessao
+	WHERE CONVERT(DATE, CessaoDtalIQ) BETWEEN @DATAINI AND @DATAFIM 
+	AND CessaoStatusId = 1
+	AND CessaoNFDistribuidora <> ''
+	GROUP BY CONVERT(DATE, CessaoDtalIQ)
+) B
+ON DT.DataTemp = B.DataAPIPed
+LEFT JOIN (
+	SELECT
+	CONVERT(DATE, CessaoDtalIQ) 'DataMobPago',
+	COALESCE(SUM(CessaoValor), 0) 'ValorCessaoMobPago'	
+	FROM Cessao
+	WHERE CONVERT(DATE, CessaoDtalIQ) BETWEEN @DATAINI AND @DATAFIM 
+	AND CessaoStatusId = 1
+	GROUP BY CONVERT(DATE, CessaoDtalIQ)
+) C
+ON DT.DataTemp = C.DataMobPago
+LEFT JOIN (
+	SELECT
+	CONVERT(DATE, CessaoDtalIQ) 'DataAPIPago',
+	COALESCE(SUM(CessaoValor), 0) 'ValorCessaoAPIPago'	
+	FROM Cessao
+	WHERE CONVERT(DATE, CessaoDtalIQ) BETWEEN @DATAINI AND @DATAFIM 
+	AND CessaoStatusId = 1
+	AND CessaoNFDistribuidora <> ''
+	GROUP BY CONVERT(DATE, CessaoDtalIQ)
+) D
+ON DT.DataTemp = D.DataAPIPago
+
 INSERT INTO ConcResultados 
 (
 	ConcResultadosData,
@@ -194,13 +252,13 @@ INSERT INTO ConcResultados
 	ConcResultadosPrestServ,
 	ConcResultadosVendas
 )
-SELECT A.ConcResultadosData, 'OK', 'OK', B.ConcResultadosAntecip, 'OK', 'OK', 'OK', 'OK', 'OK', A.ConcResultadosVendas
+SELECT A.ConcResultadosData, 'OK', 'OK', B.ConcResultadosAntecip, 'OK', C.ConcResultadosCessao, 'OK', 'OK', 'OK', A.ConcResultadosVendas
 FROM #_ConcResultadosVendas A
 LEFT JOIN #_ConcResultadosAntecip B
 ON A.ConcResultadosData = B.ConcResultadosData
+LEFT JOIN #_ConcResultadosCessao C
+ON A.ConcResultadosData = C.ConcResultadosData
 
 END
 
 GO
-
-

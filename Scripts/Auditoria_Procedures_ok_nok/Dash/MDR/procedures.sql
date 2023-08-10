@@ -18,7 +18,6 @@ no mdr cliente, previsto - realizado se menor que 0 mobbuy, se maior que 0, como
 alter table movtrn01
 add MovTrnTxaComVlrPrv numeric(12,2) null
 
-
 select a.MovTrnVlr, 
 a.MovTrnVlrLiqBemFac, 
 a.MovTrnGbpVlrTxaInt, 
@@ -44,6 +43,7 @@ BEGIN
 	FROM MovTrn01
 	WHERE MovTrnDta = @DataTrn
 	AND MovTrnCod in ('CV', 'PS')
+	AND MovTrnTipPrd <> 'P'
 END
 
 GO
@@ -59,26 +59,12 @@ BEGIN
 	FROM MovTrn01
 	WHERE MovTrnDta = @DataTrn
 	AND MovTrnCod in ('CV', 'PS')
+	AND MovTrnTipPrd <> 'P'
 END
 
 GO
 
-ALTER PROCEDURE ConcMdrCliPrev 
-(
-	@DataTrn Date,
-	@ValorTrn Numeric(17,2) OUTPUT
-)
-AS
-BEGIN
-	SELECT @ValorTrn = COALESCE(SUM(MovTrnTxaEstVlrPrv), 0)
-	FROM MovTrn01
-	WHERE MovTrnDta = @DataTrn
-	AND MovTrnCod in ('CV', 'PS')
-END
-
-GO
-
-ALTER PROCEDURE ConcMdrCliRealiz 
+CREATE PROCEDURE ConcMdrCliPrev 
 (
 	@DataTrn Date,
 	@ValorTrn Numeric(17,2) OUTPUT
@@ -88,7 +74,24 @@ BEGIN
 	SELECT @ValorTrn = COALESCE(SUM(MovTrnBfaVlrTxaAdm), 0)
 	FROM MovTrn01
 	WHERE MovTrnDta = @DataTrn
-	AND MovTrnCod in ('CV', 'PS')
+	AND MovTrnCod = 'CV'
+	AND MovTrnEstTxaAntPrv = 0
+END
+
+GO
+
+CREATE PROCEDURE ConcMdrCliRealiz 
+(
+	@DataTrn Date,
+	@ValorTrn Numeric(17,2) OUTPUT
+)
+AS
+BEGIN
+	SELECT @ValorTrn = COALESCE(SUM(MovTrnBfaVlrTxaAdm), 0)
+	FROM MovTrn01
+	WHERE MovTrnDta = @DataTrn
+	AND MovTrnCod = 'CV'
+	AND MovTrnEstTxaAntPrv = 0
 END
 
 GO
