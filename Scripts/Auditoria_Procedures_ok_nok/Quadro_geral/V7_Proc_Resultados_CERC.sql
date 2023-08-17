@@ -489,6 +489,82 @@ ON DT.DataTemp = D.DataRec
 
 /*FIM CONSULTA PARA MONTAR RESULTADOS AGENDA*/
 
+/*TABELA TEMPORARIA RESULTADO CERC*/
+
+CREATE TABLE #_ConcResultadosCerc
+(	
+	ConcResultadosData Date,
+	ConcResultadosCerc VARCHAR(5)
+)
+
+/*INICIO CONSULTA PARA MONTAR RESULTADOS PIX*/
+INSERT INTO #_ConcResultadosCerc
+
+SELECT DT.DataTemp,
+CASE 
+	WHEN A.ValorEfeito = B.ValorPago AND C.ValorRecLiq = D.ValorVlrPag THEN 'OK'
+	WHEN A.ValorEfeito IS NULL AND B.ValorPago IS NULL AND C.ValorRecLiq IS NULL AND D.ValorVlrPag IS NULL THEN 'OK'
+	ELSE 'NOK'
+END
+FROM #_DataTemporaria DT
+LEFT JOIN 
+(
+	SELECT COALESCE(SUM(EfeitoContratoVlrRepasse), 0) 'ValorEfeito', EfeitoContratoDtaVenc 'EfeitoData'
+	FROM
+	EfeitoContrato a
+	WHERE a.EfeitoContratoDtaVenc BETWEEN @DATAINI AND @DATAFIM
+	AND a.EfeitoContratoArbNum > 0
+	AND a.EfeitoContratoVlrRepasse > 0
+	GROUP BY EfeitoContratoDtaVenc
+) A
+ON DT.DATATEMP = A.EfeitoData
+LEFT JOIN 
+(
+	SELECT COALESCE(SUM(ArbDetVlr), 0) 'ValorPago', ArbDetDtaCre 'DataPgt'
+	FROM ARQDET a
+	WHERE ArbDetDtaCre BETWEEN @DATAINI AND @DATAFIM
+	AND ArbNum IN
+	(
+	SELECT EfeitoContratoArbNum 
+	FROM
+	EfeitoContrato a
+	WHERE a.EfeitoContratoDtaVenc BETWEEN @DATAINI AND @DATAFIM
+	AND a.EfeitoContratoArbNum > 0
+	AND a.EfeitoContratoVlrRepasse > 0
+	)
+	GROUP BY ArbDetDtaCre
+) B
+ON DT.DATATEMP = B.DataPgt
+LEFT JOIN
+(
+	SELECT COALESCE(SUM(UnidPagVlrLiq), 0) 'ValorRecLiq', UnidDtaVcto 'DataRecLiq'
+	FROM UnidRecPag
+	WHERE UnidDtaVcto BETWEEN @DATAINI AND @DATAFIM
+	GROUP BY UnidDtaVcto
+) C
+ON DT.DataTemp = C.DataRecLiq
+LEFT JOIN
+(
+	select sum(coalesce(a.valorvlrpag, 0) + coalesce(b.ValorVlrPag, 0)) 'ValorVlrPag', a.DataVlrPag from (
+	SELECT COALESCE(SUM(VlpVlrPag), 0) 'ValorVlrPag', VlpDtaVct 'DataVlrPag' 
+	FROM VLRPAG A
+	WHERE A.VlpDtaVct BETWEEN @DATAINI AND @DATAFIM
+	AND A.VlpIdCreditTransaction = 0
+	AND A.VlpIdCreditTransactionPai = 0
+	GROUP BY VlpDtaVct) a
+	left join (
+		SELECT COALESCE(SUM(VlpVlrPag), 0)	'valorvlrpag', VlpDtaVct 'DataVlrPag'
+		FROM VLRPAG A
+		WHERE A.VlpDtaVct BETWEEN @DATAINI AND @DATAFIM
+		AND A.VlpIdCreditTransaction > 0
+		GROUP BY VlpDtaVct
+	) b on a.DataVlrPag = b.DataVlrPag
+	group by a.DataVlrPag
+) D
+ON DT.DataTemp = D.DataVlrPag
+
+/*FIM CONSULTA PARA MONTAR RESULTADOS PIX*/
+
 INSERT INTO ConcResultados 
 (
 	ConcResultadosData,
@@ -502,7 +578,8 @@ INSERT INTO ConcResultados
 	ConcResultadosPrestServ,
 	ConcResultadosVendas
 )
-SELECT A.ConcResultadosData, G.ConcResultadosAgenda, 'OK', B.ConcResultadosAntecip, 'OK', C.ConcResultadosCessao, ConcResultadosMDR, F.ConcResultadosPix, E.ConcResultadosPs, A.ConcResultadosVendas
+SELECT A.ConcResultadosData, G.ConcResultadosAgenda, 'OK', B.ConcResultadosAntecip, H.ConcResultadosCerc, 
+C.ConcResultadosCessao, ConcResultadosMDR, F.ConcResultadosPix, E.ConcResultadosPs, A.ConcResultadosVendas
 FROM #_ConcResultadosVendas A
 LEFT JOIN #_ConcResultadosAntecip B
 ON A.ConcResultadosData = B.ConcResultadosData
@@ -516,6 +593,8 @@ LEFT JOIN #_ConcResultadosPix F
 ON A.ConcResultadosData = F.ConcResultadosData
 LEFT JOIN #_ConcResultadosAgenda G
 ON A.ConcResultadosData = G.ConcResultadosData
+LEFT JOIN #_ConcResultadosCerc H
+ON A.ConcResultadosData = H.ConcResultadosData
 
 END
 

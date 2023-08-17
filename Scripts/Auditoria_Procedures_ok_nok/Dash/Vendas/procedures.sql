@@ -1,7 +1,7 @@
 use Pronto
 go
 
-create PROCEDURE ConcMobVendasSint
+ALTER PROCEDURE ConcMobVendasSint
 (
 	@DataTrn DATE,
 	@ValorTrn NUMERIC(17,2) OUTPUT
@@ -13,6 +13,7 @@ BEGIN
 	WHERE MovTrnDta = @DataTrn
 	AND MovTrnCod IN ('CV', 'CC', 'PS')
 	AND MovTrnTipPrd <> 'P'
+	AND MovTrnVanSeq > 0
 END
 
 GO
@@ -27,7 +28,7 @@ select * from MovTrn01 where MovTrnTipPrd = 'P'
 
 GO
 
-create PROCEDURE ConcSitefVendasSint
+ALTER PROCEDURE ConcSitefVendasSint
 (
 	@DataTrn DATE,
 	@ValorTrn NUMERIC(17,2) OUTPUT
@@ -40,8 +41,8 @@ BEGIN
 	IIF(VanWbsDsc LIKE '%CANCELAMENTO%', ((CONVERT(NUMERIC(17,2),VanWbsVlr))/100) * -1, ((CONVERT(NUMERIC(17,2),VanWbsVlr))/100)) 'ValorTrn'
 	FROM VAN02 
 	WHERE VanWbsDat = @DataTrn
-	AND VanErrCod = 0
-	AND VanWbsSta LIKE '%CONFIRMADA%') A
+	AND (VanErrCod = 0 OR VanErrCod = 2010)
+	AND (VanWbsSta LIKE '%CONFIRMADA%' OR VanWbsSta LIKE '%ESTORNADA%')) A
 END
 
 GO
@@ -56,7 +57,7 @@ select @vendas
 GO
 
 
-create PROCEDURE ConcAdqVendasSint
+alter PROCEDURE ConcAdqVendasSint
 (
 	@DataTrn DATE,
 	@ValorTrn NUMERIC(17,2) OUTPUT

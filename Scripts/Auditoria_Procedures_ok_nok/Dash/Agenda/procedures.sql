@@ -8,7 +8,7 @@ ALTER PROCEDURE ConcMobAgdPagoPrv
 )
 AS
 BEGIN
-	SELECT @ValorTrn = SUM(A.ArbDetVlr) FROM (
+	SELECT @ValorTrn = COALESCE(SUM(A.ArbDetVlr),0) FROM (
 	SELECT DISTINCT A.ArbDetEstCod, A.ArbDetVlr, A.ArbNum, A.ArbDetDtaCre
 	FROM ARQDET A
 	LEFT JOIN ARQDETLAN B
@@ -16,6 +16,7 @@ BEGIN
 	LEFT JOIN VLRPAG C
 	ON B.ArbDetVlpNumLan = C.VlpNumLan
 	WHERE A.ArbDetDtaCre = @DataTrn
+	AND A.ArbDetCodSit = 4
 	AND (C.VlpStspag = 2 OR C.VlpStspag IS NULL)) A
 	--SELECT @ValorTrn = 0
 END
@@ -34,6 +35,34 @@ BEGIN
 	WHERE A.ArbDetDtaCre = @DataTrn
 	AND A.ArbDetCodSit = 4
 	--SELECT @ValorTrn = 0
+END
+GO
+
+ALTER PROCEDURE ConcMobAgdRecPrv 
+(
+	@DataTrn DATE, 
+	@ValorTrn NUMERIC(17,2) OUTPUT
+)
+AS
+BEGIN
+	SELECT @ValorTrn = COALESCE(SUM(VlrVlrRec), 0) 
+	FROM VLRREC
+	WHERE VlrDtaPrvLiqAnt = @DataTrn
+	AND VlrStsRec = 2
+	--SET @ValorTrn = 1
+END
+GO
+
+ALTER PROCEDURE ConcMobAgdRecRel
+(
+	@DataTrn DATE, 
+	@ValorTrn NUMERIC(17,2) OUTPUT
+)
+AS
+BEGIN
+	SELECT @ValorTrn = COALESCE(SUM(RadDetVlr), 0)
+	FROM RAD0002 
+	WHERE RadDat = @DataTrn
 END
 GO
 
@@ -68,7 +97,8 @@ GO
 	ON A.ArbNum = B.ArbNum AND A.ArbLotNum = B.ArbLotNum AND A.ArbDetSeq = B.ArbDetSeq
 	LEFT JOIN VLRPAG C
 	ON B.ArbDetVlpNumLan = C.VlpNumLan
-	WHERE A.ArbDetDtaCre = '20230704'
+	WHERE A.ArbDetDtaCre = '20230703'
+	AND A.ArbDetCodSit = 4
 	AND (C.VlpStspag = 2 OR C.VlpStspag IS NULL)) A
 
 	--1791664,85
@@ -76,7 +106,7 @@ GO
 
 	SELECT COALESCE(SUM(A.ArbDetVlr), 0) 	
 	FROM ARQDET A
-	WHERE A.ArbDetDtaCre = '20230704'
+	WHERE A.ArbDetDtaCre = '20230703'
 	AND A.ArbDetCodSit = 4
 	--1798938.67
 
