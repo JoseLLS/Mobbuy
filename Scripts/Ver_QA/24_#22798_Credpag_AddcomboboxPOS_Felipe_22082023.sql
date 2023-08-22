@@ -1,0 +1,2 @@
+ALTER TABLE [POS]
+ADD [PosOrigem] SMALLINT    NULL
