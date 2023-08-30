@@ -6,7 +6,6 @@ CREATE TABLE [AlugPOS] (
   [AlugPOSValor]  DECIMAL(17,2)    NULL,
      PRIMARY KEY ( [AlugPOSId] ));
 	 
-
 CREATE TABLE [AlugMeta] (
   [AlugMetaId]         SMALLINT    NOT NULL    IDENTITY ( 1 , 1 ),
   [AlugMetaSegmento]   VARCHAR(40)    NOT NULL,
@@ -14,22 +13,20 @@ CREATE TABLE [AlugMeta] (
   [AlugMetaValor]      DECIMAL(17,2)    NULL,
      PRIMARY KEY ( [AlugMetaId] ));
 	 
-
 CREATE TABLE [AlugMotivo] (
   [AlugMotivoId]   SMALLINT    NOT NULL    IDENTITY ( 1 , 1 ),
   [AlugMotivoDsc]  VARCHAR(40)    NULL,
   [AlugMotivoDias] SMALLINT    NULL,
      PRIMARY KEY ( [AlugMotivoId] ));
 	 
-
 CREATE TABLE [AlugParm] (
   [AlugParmId]      SMALLINT    NOT NULL    IDENTITY ( 1 , 1 ),
   [AlugParmDtaVct]  SMALLINT    NULL,
   [AlugParmDiasCar] SMALLINT    NULL,
   [AlugParmDiasInat] SMALLINT    NULL,
   [AlugParmDiasIsePOS] SMALLINT    NULL,
+  [AlugParmDiasIseEC] SMALLINT    NULL,
      PRIMARY KEY ( [AlugParmId] ));
-
 
 ALTER TABLE [POS]
 ADD [AlugMotivoId] SMALLINT    NULL
@@ -47,12 +44,14 @@ CREATE NONCLUSTERED INDEX [IHISPOS3] ON [HISPOS] ([AlugMotivoId])
 ALTER TABLE [HISPOS]
 ADD CONSTRAINT [IHISPOS3] FOREIGN KEY ( [AlugMotivoId] ) REFERENCES [AlugMotivo]([AlugMotivoId]);
 
-
 ALTER TABLE [EST]
 ADD [EstIseAlug] BIT    NULL;
 
 ALTER TABLE [EST]
 ADD [EstDtaAltStatus] DATETIME    NULL;
+
+ALTER TABLE [EST]
+ADD [EstDtaIseAlug] DATETIME    NULL;
 
 ALTER TABLE [GrupoComercial]
 ADD [GrupoComercialIseAlug] BIT    NULL;
@@ -97,8 +96,7 @@ ON EST.EstCod = HISPOS.HipCodEst
 LEFT JOIN MotDev
 on MotDev.MotDevId = HISPOS.MotDevId
 LEFT JOIN AlugMotivo
-ON AlugMotivo.AlugMotivoId = HISPOS.AlugMotivoId
-GO;
+ON AlugMotivo.AlugMotivoId = HISPOS.AlugMotivoId;
 	 
 ------------------------------------------------------------------------------------------------------------------------
 
