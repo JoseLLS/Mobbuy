@@ -1,5 +1,8 @@
 /*RODAR TODA VEZ QUE ATUALIZAR UM BANCO DE QA DE ALGUM CLIENTE*/
 
+use EstBank
+go
+
 UPDATE PARSIS 
 SET ParCon = 'N' 
 WHERE ParCod = 'SSL_OBRIGATORIO'
@@ -38,11 +41,11 @@ SET ParCon = 'https://apigateway-qa.mobbuyapp.com'
 WHERE ParCod = 'SIMULADORAPI_HOST'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/bemfacilev15/rest/' --Alterar o "bemfacilev15" conforme o cliente
+SET ParCon = 'https://sistemas.mobbuyapp.com/estbankev15/rest/' --Alterar o "Estbankev15" conforme o cliente
 WHERE ParCod = 'URL_GX16_API'
 
 UPDATE PARSIS
-SET ParCon = 'https://portal.mobbuyapp.com/bemfacil/servlet/iface_resetsenha?' --Alterar o "bemfacil" conforme o cliente
+SET ParCon = 'https://portal.mobbuyapp.com/estbank/servlet/iface_resetsenha?' --Alterar o "estbank" conforme o cliente
 WHERE ParCod = 'URL_RESET_SENHA'
 
 UPDATE PARSIS
@@ -50,19 +53,19 @@ SET ParCon = 'portal.mobbuyapp.com'
 WHERE ParCod = 'URL_SISTEMA'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/prontoev15/rest/PosTokenInstWS' --Alterar o "prontoev15" conforme o cliente
+SET ParCon = 'https://sistemas.mobbuyapp.com/estbankev15/rest/PosTokenInstWS' --Alterar o "estbankev15" conforme o cliente
 WHERE ParCod = 'POS_TOKEN_INST_WS'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/prontoev15' --Alterar o "prontoev15" conforme o cliente
+SET ParCon = 'https://sistemas.mobbuyapp.com/estbankev15' --Alterar o "estbankev15" conforme o cliente
 WHERE ParCod = 'URL_GX16'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/prontoev15/rest/'
+SET ParCon = 'https://sistemas.mobbuyapp.com/estbankev15/rest/'
 WHERE ParCod = 'URL_GX16_API_CAN_CESSAO'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/prontoev15/rest/'
+SET ParCon = 'https://sistemas.mobbuyapp.com/estbankev15/rest/'
 WHERE ParCod = 'URL_CAN_CESSAO_NOVA_VERSAO'
 
 UPDATE PARSIS
@@ -70,16 +73,16 @@ SET ParCon = 'http://64.227.0.44:8089/Monitoramento/rest/InsereTransacaoWS'
 WHERE ParCod = 'URL_INSERE_TRN_MONITOR'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/prontoev15/rest/SaldoV3EstabelecimentoWS'
+SET ParCon = 'https://sistemas.mobbuyapp.com/estbankev15/rest/SaldoV3EstabelecimentoWS'
 WHERE ParCod = 'URL_SALDO_CESSAO'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/prontoev15/rest/api_auth_cerc'
+SET ParCon = 'https://sistemas.mobbuyapp.com/estbankev15/rest/api_auth_cerc'
 WHERE ParCod = 'URL_TOKEN_CERC'
 
 UPDATE PARSIS
 SET ParCon = 'http://64.227.0.44:8089/Monitoramento/rest/MonitoramentoTransacaoWS'
 WHERE ParCod = 'URL_VERIFICA_MONITOR'
 
-UPDATE PARSIS SET ParCon = 'https://sistemas.mobbuyapp.com/prontoev15/rest/LiquidaCessaoV2WS'
+UPDATE PARSIS SET ParCon = 'https://sistemas.mobbuyapp.com/estbankev15/rest/LiquidaCessaoV2WS'
 WHERE PARCOD = 'LIQUIDA_CESSAO'
