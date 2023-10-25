@@ -1,4 +1,4 @@
-USE [Pronto]
+USE [ProntoAgosto]
 GO
 
 
@@ -61,12 +61,15 @@ DECLARE @TOTALCESSAOORI NUMERIC(18,2);
 DECLARE @TOTALCESSAOBEN NUMERIC(18,2);
 DECLARE @TOTALDETCESSAOORI NUMERIC(18,2);
 DECLARE @TOTALDETCESSAOBEN NUMERIC(18,2);
+DECLARE @TOTALDETCESSAOBENAJUSTE NUMERIC(18,2);
+DECLARE @TOTALBANCOAJUSTE NUMERIC(18,2);
 DECLARE @TOTALARQUIVO NUMERIC(18,2);
 DECLARE @TOTALPAGO NUMERIC(18,2);
 DECLARE @TOTALPAGOBNF NUMERIC(18,2);
 DECLARE @TOTALESTORNO NUMERIC(18,2);
 DECLARE @TOTALALUGUEL NUMERIC(18,2);
 DECLARE @TOTALAJUSTECONTABIL NUMERIC(18,2);
+DECLARE @TOTALAJUSTECESSAO NUMERIC(18,2);
 DECLARE @ALUGUELABERTO NUMERIC(18,2);
 
 /*ANALITICO VALOR PAGO ESTCOD E BENEFICIARIO IGUAIS - INICIO*/
@@ -646,7 +649,7 @@ WHERE EstCod = @ESTCOD AND VlpNsu = 0
 GROUP BY VlpMovTrnId, VlpStspag, VlpIdCreditTransaction, VlpIdCreditTransactionPai, VlpAnpNum, VlpTrnCod
 ) B
 ON A.MovTrnId = B.VlpMovTrnId
-WHERE A.EstCod = @ESTCOD AND MovTrnNsu = 0 AND MovTrnCod <> 'AC'
+WHERE A.EstCod = @ESTCOD AND MovTrnNsu = 0
 /*INSERT ANALITICO AJUSTES - FIM*/
 
 
@@ -710,9 +713,127 @@ AND VlpStspag = 2
 
 /*ALTERACAO V8 - INSERIR VALORES AJUSTE CONTABIL*/
 
-INSERT INTO RtAjusteCon (RtAjusteConEstCod, RtAjusteConNsu, RtAjusteConAutCod, RtAjusteConTrnCod, 
-RtAjusteConValor, RtAjusteConData, RtAjusteConBan, RtAjusteConPrd, RtAjusteConGuid, RtAjusteConDataInc, RtAjusteConUsrId)
-SELECT @ESTCOD, 0, '', VlpTrnCod, VlpVlrPag, VlpDtaVct, '', '', @RELGUID, @DATAINC, @UsrId
+INSERT INTO 
+RtAjusteCon (RtAjusteConEstCod, RtAjusteConNsu, RtAjusteConAutCod, RtAjusteConTrnCod, RtAjusteConValor, RtAjusteConData, 
+RtAjusteConBan, RtAjusteConPrd, RtAjusteConGuid, RtAjusteConDataInc, RtAjusteConUsrId)
+SELECT @ESTCOD, 0, '', VlpTrnCod, VlpVlrPag, VlpDtaVct, '', VlpTipPrd, @RELGUID, @DATAINC, @UsrId
+FROM VLRPAG
+WHERE EstCod = @ESTCOD
+AND VlpBnfCod = @ESTCOD
+AND TidCod = 1
+AND VlpTrnCod = 'CS'
+AND VlpStspag = 12
+
+INSERT INTO RtAnalitico (RtAnaliticoEstCod, RtAnaliticoNsu, RtAnaliticoAutcod, RtAnaliticoDataTrn, RtAnaliticoProduto,
+RtAnaliticoBandeira, RtAnaliticoTrnCod, RtAnaliticoValorTrn, RtAnaliticoValorLiqEst, RtAnaliticoValorPago,
+RtAnaliticoValorAberto, RtAnaliticoValorCancelado, RtAnaliticoCessao, RtAnaliticoValorAnt, RtAnaliticoCessaoBNF,
+RtAnaliticoValorPagoBNF, RtAnaliticoValorConc, RtAnaliticoValorEstorno, RtAnaliticoValorAjusteContabil, RtAnaliticoValorAjusteCessao, RtAnaliticoGuid, RtAnaliticoDataInc, RtAnaliticoUsr)
+SELECT @ESTCOD, 0, '', VlpDtaVct, VlpTipPrd, VlpBan, VlpTrnCod, 
+VlpVlrPag, -- VALOR TRN
+VlpVlrPag, -- VALOR LIQ EST
+0, -- VALOR PAGO
+0, -- VALOR ABERTO
+0, -- VALOR CANCELADO
+0, -- VALOR CESSAO
+0, -- VALOR ANTECIPACAO
+0, -- VALOR CESSAO BNF
+0, -- VALOR PAGO BNF
+0, -- VALOR CONC
+0, --VALOR ESTORNO
+0, --VALOR AJUSTE CONTABIL
+VlpVlrPag, --VALOR AJUSTE CESSAO
+@RELGUID, 
+@DATAINC, 
+@UsrId
+FROM VLRPAG
+WHERE EstCod = @ESTCOD
+AND VlpBnfCod = @ESTCOD
+AND TidCod = 1
+AND VlpTrnCod = 'CS'
+AND VlpStspag = 12
+
+
+INSERT INTO 
+RtAjusteCon (RtAjusteConEstCod, RtAjusteConNsu, RtAjusteConAutCod, RtAjusteConTrnCod, RtAjusteConValor, RtAjusteConData, 
+RtAjusteConBan, RtAjusteConPrd, RtAjusteConGuid, RtAjusteConDataInc, RtAjusteConUsrId)
+SELECT @ESTCOD, 0, '', 'CS', VwRelAudCessaoDetValor, CONVERT(DATE, VwRelAudCessaoDtaCad), '', '', @RELGUID, @DATAINC, @UsrId
+FROM VwRelAudCessao 
+WHERE VwRelAudCessaoBenEstCod = @ESTCOD AND VwRelAudVlpTrnCod IS NULL
+
+
+INSERT INTO RtAnalitico (RtAnaliticoEstCod, RtAnaliticoNsu, RtAnaliticoAutcod, RtAnaliticoDataTrn, RtAnaliticoProduto,
+RtAnaliticoBandeira, RtAnaliticoTrnCod, RtAnaliticoValorTrn, RtAnaliticoValorLiqEst, RtAnaliticoValorPago,
+RtAnaliticoValorAberto, RtAnaliticoValorCancelado, RtAnaliticoCessao, RtAnaliticoValorAnt, RtAnaliticoCessaoBNF,
+RtAnaliticoValorPagoBNF, RtAnaliticoValorConc, RtAnaliticoValorEstorno, RtAnaliticoValorAjusteContabil, RtAnaliticoValorAjusteCessao, RtAnaliticoValorAjusteCessaoBnf, RtAnaliticoGuid, RtAnaliticoDataInc, RtAnaliticoUsr)
+SELECT 
+@ESTCOD, 0, '', CONVERT(DATE, VwRelAudCessaoDtaCad), 'Cessao', '', 'CS', 
+VwRelAudCessaoDetValor, --VALOR TRN
+VwRelAudCessaoDetValor, --VALOR LIQ EST
+0,--VALOR PAGO
+0,--VALOR ABERTO
+0,--VALOR CANCELADO
+0,--VALOR CESSAO
+0,--VALOR ANT
+0,--VALOR CESSAO BNF
+0,--VALOR PAGO BNF
+0,--VALOR CONC
+0,--VALOR ESTORNO
+0,--VALOR AJUSTE CONTABIL
+0,--AJUSTE CESSAO
+VwRelAudCessaoDetValor,--AJUSTE CESSAO BNF
+@RELGUID, 
+@DATAINC, 
+@UsrId
+FROM VwRelAudCessao 
+WHERE VwRelAudCessaoBenEstCod = @ESTCOD AND VwRelAudVlpTrnCod IS NULL
+
+
+INSERT INTO 
+RtAjusteCon (RtAjusteConEstCod, RtAjusteConNsu, RtAjusteConAutCod, RtAjusteConTrnCod, RtAjusteConValor, RtAjusteConData, 
+RtAjusteConBan, RtAjusteConPrd, RtAjusteConGuid, RtAjusteConDataInc, RtAjusteConUsrId)
+SELECT @ESTCOD, 0, '', VlpTrnCod, VlpVlrPag, VlpDtaVct, '', VlpTipPrd, @RELGUID, @DATAINC, @UsrId
+FROM VLRPAG
+WHERE EstCod = @ESTCOD
+AND VlpBnfCod = @ESTCOD
+AND TidCod = 1
+AND VlpTrnCod = 'AB'
+AND VlpStspag = 12
+
+INSERT INTO RtAnalitico (RtAnaliticoEstCod, RtAnaliticoNsu, RtAnaliticoAutcod, RtAnaliticoDataTrn, RtAnaliticoProduto,
+RtAnaliticoBandeira, RtAnaliticoTrnCod, RtAnaliticoValorTrn, RtAnaliticoValorLiqEst, RtAnaliticoValorPago,
+RtAnaliticoValorAberto, RtAnaliticoValorCancelado, RtAnaliticoCessao, RtAnaliticoValorAnt, RtAnaliticoCessaoBNF,
+RtAnaliticoValorPagoBNF, RtAnaliticoValorConc, RtAnaliticoValorEstorno, RtAnaliticoValorAjusteContabil, RtAnaliticoValorAjusteCessao, RtAnaliticoValorAjusteCessaoBnf, RtAnaliticoValorAjusteBanco, RtAnaliticoGuid, RtAnaliticoDataInc, RtAnaliticoUsr)
+SELECT @ESTCOD, 0, '', VlpDtaVct, VlpTipPrd, VlpBan, VlpTrnCod, 
+VlpVlrPag, -- VALOR TRN
+VlpVlrPag, -- VALOR LIQ EST
+0, -- VALOR PAGO
+0, -- VALOR ABERTO
+0, -- VALOR CANCELADO
+0, -- VALOR CESSAO
+0, -- VALOR ANTECIPACAO
+0, -- VALOR CESSAO BNF
+0, -- VALOR PAGO BNF
+0, -- VALOR CONC
+0, --VALOR ESTORNO
+0, --VALOR AJUSTE CONTABIL
+0, --VALOR AJUSTE CESSAO
+0, --VALOR AJUSTE CESSAO BNF
+VlpVlrPag, --VALOR AJUSTE Banco
+@RELGUID, 
+@DATAINC, 
+@UsrId
+FROM VLRPAG
+WHERE EstCod = @ESTCOD
+AND VlpBnfCod = @ESTCOD
+AND TidCod = 1
+AND VlpTrnCod = 'AB'
+AND VlpStspag = 12
+
+
+INSERT INTO 
+RtAjusteCon (RtAjusteConEstCod, RtAjusteConNsu, RtAjusteConAutCod, RtAjusteConTrnCod, RtAjusteConValor, RtAjusteConData, 
+RtAjusteConBan, RtAjusteConPrd, RtAjusteConGuid, RtAjusteConDataInc, RtAjusteConUsrId)
+SELECT @ESTCOD, 0, '', VlpTrnCod, VlpVlrPag, VlpDtaVct, '', VlpTipPrd, @RELGUID, @DATAINC, @UsrId
 FROM VLRPAG
 WHERE EstCod = @ESTCOD
 AND VlpBnfCod = @ESTCOD
@@ -724,7 +845,7 @@ AND VlpNsu = 0
 INSERT INTO RtAnalitico (RtAnaliticoEstCod, RtAnaliticoNsu, RtAnaliticoAutcod, RtAnaliticoDataTrn, RtAnaliticoProduto,
 RtAnaliticoBandeira, RtAnaliticoTrnCod, RtAnaliticoValorTrn, RtAnaliticoValorLiqEst, RtAnaliticoValorPago,
 RtAnaliticoValorAberto, RtAnaliticoValorCancelado, RtAnaliticoCessao, RtAnaliticoValorAnt, RtAnaliticoCessaoBNF,
-RtAnaliticoValorPagoBNF, RtAnaliticoValorConc, RtAnaliticoValorEstorno, RtAnaliticoValorAjusteContabil, RtAnaliticoGuid, RtAnaliticoDataInc, RtAnaliticoUsr)
+RtAnaliticoValorPagoBNF, RtAnaliticoValorConc, RtAnaliticoValorEstorno, RtAnaliticoValorAjusteContabil, RtAnaliticoValorAjusteCessao, RtAnaliticoValorAjusteCessaoBnf, RtAnaliticoValorAjusteBanco, RtAnaliticoGuid, RtAnaliticoDataInc, RtAnaliticoUsr)
 SELECT @ESTCOD, 0, '', VlpDtaVct, VlpTipPrd, VlpBan, VlpTrnCod, 
 VlpVlrPag, -- VALOR TRN
 VlpVlrPag, -- VALOR LIQ EST
@@ -738,6 +859,9 @@ VlpVlrPag, -- VALOR LIQ EST
 0, -- VALOR CONC
 0, --VALOR ESTORNO
 VlpVlrPag, --VALOR AJUSTE CONTABIL
+0, --VALOR AJUSTE CESSAO
+0, --VALOR AJUSTE CESSAO BNF
+0, --VALOR AJUSTE Banco
 @RELGUID, 
 @DATAINC, 
 @UsrId
@@ -752,7 +876,7 @@ AND VlpNsu = 0
 
 /*INSERT CONSOLIDADO - INICIO*/
 SELECT @MOVTRNVLRVENDA = COALESCE(SUM(MovTrnVlr), 0), @MOVTRNVLRLIQVENDA = COALESCE(SUM(MovTrnVlrLiqEst),0) 
-FROM MovTrn01 WHERE EstCod = @ESTCOD AND MovTrnCod NOT IN ('CC', 'AC');
+FROM MovTrn01 WHERE EstCod = @ESTCOD AND MovTrnCod <> 'CC';
 
 SELECT @MOVTRNVLRCANC = COALESCE(SUM(MovTrnVlr),0), @MOVTRNVLRLIQCANC = COALESCE(SUM(MovTrnVlrLiqEst),0) 
 FROM MovTrn01 WHERE EstCod = @ESTCOD AND MovTrnCod = 'CC';
@@ -760,9 +884,14 @@ FROM MovTrn01 WHERE EstCod = @ESTCOD AND MovTrnCod = 'CC';
 SELECT @TOTALANT = COALESCE(SUM(RtAnaliticoValorAnt),0), @TOTALABERTO = COALESCE(SUM(RtAnaliticoValorAberto),0),
 @TOTALDETCESSAOORI = COALESCE(SUM(RtAnaliticoCessao),0), @TOTALDETCESSAOBEN = COALESCE(SUM(RtAnaliticoCessaoBnf),0),
 @TOTALPAGO = COALESCE(SUM(RtAnaliticoVALORPAGO),0), @TOTALPAGOBNF = COALESCE(SUM(RtAnaliticoVALORPAGOBNF),0),
-@TOTALESTORNO = COALESCE(SUM(RtAnaliticoValorEstorno),0), @TOTALAJUSTECONTABIL = COALESCE(SUM(RtAnaliticoValorAjusteContabil),0)
+@TOTALESTORNO = COALESCE(SUM(RtAnaliticoValorEstorno),0), @TOTALAJUSTECONTABIL = COALESCE(SUM(RtAnaliticoValorAjusteContabil),0), 
+@TOTALAJUSTECESSAO = COALESCE(SUM(RtAnaliticoValorAjusteCessao),0), @TOTALDETCESSAOBENAJUSTE = COALESCE(SUM(RtAnaliticoValorAjusteCessaoBnf),0), 
+@TOTALBANCOAJUSTE = COALESCE(SUM(RtAnaliticoValorAjusteBanco),0)
 FROM RtAnalitico
 WHERE RtAnaliticoEstCod = @ESTCOD;
+
+SET @TOTALDETCESSAOORI = @TOTALDETCESSAOORI + @TOTALAJUSTECESSAO;
+SET @TOTALDETCESSAOBEN = @TOTALDETCESSAOBEN + @TOTALDETCESSAOBENAJUSTE;
 
 /*CONSIDERAR APENAS O ALUGUEL PAGO*/
 SELECT @TOTALALUGUEL = COALESCE(SUM(VLPVLRPAG), 0)
@@ -796,14 +925,12 @@ AND ArbDetEstCod = @ESTCOD;
 INSERT INTO RtConsolidado (RTCONSOLIDADOESTCOD, RTCONSOLIDADOVENDAVALOR, RTCONSOLIDADOLIQESTVALOR, RTCONSOLIDADOABERTOVALOR,
 RTCONSOLIDADOCANCELAMENTOVALOR, RTCONSOLIDADORECEBERVALOR, RTCONSOLIDADOCESSAOORIVALOR, RtConsolidadoCessaoDETOriValor,
 RTCONSOLIDADOCESSAOBENVALOR, RtConsolidadoCessaoDETBenValor, RTCONSOLIDADOBANCOVALOR, RTCONSOLIDADOCUSTOANTVALOR, RTCONSOLIDADOPAGO,
-RtConsolidadoAluguelPos, RtConsolidadoEstorno, RtConsolidadoAjusteContabil, RTCONSOLIDADOGUID)
+RtConsolidadoAluguelPos, RtConsolidadoEstorno, RtConsolidadoAjusteContabil, RtConsolidadoAjusteCessao, RtConsolidadoAjusteCessaoBnf, RtConsolidadoAjusteBanco, RTCONSOLIDADOGUID)
 VALUES (
 @ESTCOD, @MOVTRNVLRVENDA, @MOVTRNVLRLIQVENDA, @TOTALABERTO, @MOVTRNVLRLIQCANC, (@MOVTRNVLRLIQVENDA + @MOVTRNVLRLIQCANC), 
-@TOTALCESSAOORI, @TOTALDETCESSAOORI, @TOTALCESSAOBEN, @TOTALDETCESSAOBEN, @TOTALARQUIVO, @TOTALANT, (@TOTALPAGO + @TOTALPAGOBNF),
-@TOTALALUGUEL, @TOTALESTORNO, @TOTALAJUSTECONTABIL, @RELGUID
+@TOTALCESSAOORI, @TOTALDETCESSAOORI, @TOTALCESSAOBEN, @TOTALDETCESSAOBEN, @TOTALARQUIVO, @TOTALANT, (@TOTALPAGO + @TOTALPAGOBNF + @TOTALBANCOAJUSTE),
+@TOTALALUGUEL, @TOTALESTORNO, @TOTALAJUSTECONTABIL, @TOTALAJUSTECESSAO, @TOTALDETCESSAOBENAJUSTE, @TOTALBANCOAJUSTE, @RELGUID
 )
 /*INSERT CONSOLIDADO - FIM*/
 END
 GO
-
-
