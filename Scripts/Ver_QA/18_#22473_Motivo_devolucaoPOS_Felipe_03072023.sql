@@ -41,6 +41,13 @@ INSERT INTO MotDev
 values
 (N'Sem Utilização');
 
+ CREATE FUNCTION GetEst(@InEstCod INT)         
+    RETURNS  Varchar(100) 
+    BEGIN 
+      DECLARE @nome Varchar(100); 
+      set @nome = (SELECT EstRazSoc FROM Est WHERE Estcod = @InEstCod); 
+    RETURN @nome; 
+END 
 
 
 ALTER VIEW VwPOSHist as
