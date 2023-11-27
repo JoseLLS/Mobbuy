@@ -1,6 +1,18 @@
 use pronto
 go
 
+
+	 alter table RtAnalitico add RtAnaliticoValorAjusteContabil numeric(17,2) null
+	 alter table RtAnalitico add RtAnaliticoValorAjusteBanco numeric(17,2) null
+	 alter table RtAnalitico add RtAnaliticoValorAjusteCessao numeric(17,2) null
+	 alter table RtAnalitico add RtAnaliticoValorAjusteCessaoBnf numeric(17,2) null
+
+	 alter table RtConsolidado add RtConsolidadoAjusteContabil numeric(17,2) null
+
+	 alter table RtConsolidado add RtConsolidadoAjusteCessao  numeric(17,2) null
+	 alter table RtConsolidado add RtConsolidadoAjusteCessaoBnf numeric(17,2) null
+	 alter table RtConsolidado add RtConsolidadoAjusteBanco numeric(17,2) null
+
 CREATE TABLE [RtAjusteCon] (
   [RtAjusteConId]      DECIMAL(18)    NOT NULL    IDENTITY ( 1 , 1 ),
   [RtAjusteConNsu]     DECIMAL(18)    NOT NULL,
@@ -17,8 +29,6 @@ CREATE TABLE [RtAjusteCon] (
      PRIMARY KEY ( [RtAjusteConId] ))
 
 
-	 alter table RtAnalitico add RtAnaliticoValorAjusteContabil numeric(17,2) null
-	 alter table RtConsolidado add RtConsolidadoAjusteContabil numeric(17,2) null
 
 
 go
