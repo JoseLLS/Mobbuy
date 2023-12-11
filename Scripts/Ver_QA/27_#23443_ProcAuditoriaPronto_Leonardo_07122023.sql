@@ -1,6 +1,102 @@
-USE [ProntoAgosto]
+USE [Pronto]
 GO
 
+/*MODIFICALÇOES TABELA*/
+
+CREATE TABLE [RtAjusteCon] (
+  [RtAjusteConId]      DECIMAL(18)    NOT NULL    IDENTITY ( 1 , 1 ),
+  [RtAjusteConNsu]     DECIMAL(18)    NULL,
+  [RtAjusteConAutCod]  VARCHAR(20)    NULL,
+  [RtAjusteConTrnCod]  VARCHAR(10)    NULL,
+  [RtAjusteConValor]   DECIMAL(17,2)    NULL,
+  [RtAjusteConData]    DATETIME    NULL,
+  [RtAjusteConBan]     VARCHAR(1)    NULL,
+  [RtAjusteConPrd]     VARCHAR(1)    NULL,
+  [RtAjusteConEstCod]  INT    NULL,
+  [RtAjusteConDataInc] DATETIME    NULL,
+  [RtAjusteConGuid]    VARCHAR(255)    NULL,
+  [RtAjusteConUsrId]   VARCHAR(255)    NULL,
+     PRIMARY KEY ( [RtAjusteConId] ))
+
+GO
+
+alter table RtConsolidado
+add RtConsolidadoAjusteContabil   numeric(17,2) null,
+    RtConsolidadoAjusteCessao	  numeric(17,2) null,
+    RtConsolidadoAjusteCessaoBnf  numeric(17,2) null,
+    RtConsolidadoAjusteBanco	  numeric(17,2) null
+
+GO
+
+alter table RtAnalitico
+add RtAnaliticoValorAjusteContabil    numeric(17,2) null,
+    RtAnaliticoValorAjusteCessao	  numeric(17,2) null,
+    RtAnaliticoValorAjusteCessaoBnf	  numeric(17,2) null,
+    RtAnaliticoValorAjusteBanco		  numeric(17,2) null
+
+GO
+
+/*MODIFICALÇOES TABELA*/
+
+/*INSERT TELAS*/
+
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('wpReprocBanco', 'Reproc. Banco', 'Reproc. Banco', '', '', 0, 1, '')
+
+--Rodar segundo
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'wpReprocBanco', '', 280, 'CTR_FIN', '', '/pronto/servlet/') --Alterar "/cliente/servlet/"
+
+--Rodar terceiro
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (25, 'wpReprocBanco') --Dar o SELECT de baixo na sse2_ung e pegar o UNG2Cod e alterar conforme o valor de cada cliente
+
+--Rodar quarto
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (25, 'ADM', 'wpReprocBanco') 
+--Dar o SELECT de cima na sse2_ung e pagar o UNG2Cod e alterar conforme o valor de cada cliente
+
+go
+
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('wpReprocLanCessao', 'Reproc. Cessao', 'Reproc. Cessao', '', '', 0, 1, '')
+
+--Rodar segundo
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'wpReprocLanCessao', '', 280, 'CTR_FIN', '', '/pronto/servlet/') --Alterar "/cliente/servlet/"
+
+--Rodar terceiro
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (25, 'wpReprocLanCessao') --Dar o SELECT de baixo na sse2_ung e pegar o UNG2Cod e alterar conforme o valor de cada cliente
+
+--Rodar quarto
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (25, 'ADM', 'wpReprocLanCessao') 
+--Dar o SELECT de cima na sse2_ung e pagar o UNG2Cod e alterar conforme o valor de cada cliente
+
+go
+
+INSERT INTO sse2_mod (MOD2Id, MOD2IdInt, MOD2Dsc, MOD2Url, MOD2MtdLib, MOD2Aux, MOD2Sts, Mod2LstSub)
+VALUES ('wpReprocLanContabil', 'Reproc. Lan', 'Reproc. Lan', '', '', 0, 1, '')
+
+--Rodar segundo
+INSERT INTO sse2_mnu02 (MnucOd, MnuIteModFlg, MnuIteIde, MnuIteDsc, MnuIteOrd, MnuIteIdRoot, MnuIteTxt, MnuItePth)
+VALUES (10, 1, 'wpReprocLanContabil', '', 280, 'CTR_FIN', '', '/pronto/servlet/') --Alterar "/cliente/servlet/"
+
+--Rodar terceiro
+INSERT INTO sse2_ung_mod (ung2cod, mod2id)
+VALUES (25, 'wpReprocLanContabil') --Dar o SELECT de baixo na sse2_ung e pegar o UNG2Cod e alterar conforme o valor de cada cliente
+
+--Rodar quarto
+INSERT INTO sse2_grp_mod (UNG2Cod, USR2GrpId, MOD2Id)
+VALUES (25, 'ADM', 'wpReprocLanContabil') 
+--Dar o SELECT de cima na sse2_ung e pagar o UNG2Cod e alterar conforme o valor de cada cliente
+
+/*INSERT TELAS*/
+
+GO
+
+/*PROCEDURE*/
 
 /****** Object:  StoredProcedure [dbo].[RELTEMPAUDITORIA]    Script Date: 24/07/2023 10:51:18 ******/
 DROP PROCEDURE [dbo].[RELTEMPAUDITORIA]
