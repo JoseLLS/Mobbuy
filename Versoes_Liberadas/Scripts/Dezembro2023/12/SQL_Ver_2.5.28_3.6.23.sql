@@ -3,6 +3,13 @@
 INSERT INTO SQLHistorico
 VALUES ('3.6.23','2.5.28',GETDATE());
 
+/* SEM TAREFA - JOSÉ */
+
+USE Pronto;
+
+INSERT INTO USU
+VALUES ('', '', '', 'AD', '', '', '1753-01-01 00:00:00.000', '', '1753-01-01 00:00:00.000', '', '', '', '', '', '', '', '');
+
 /* TAREFA #23443 - LEONARDO */
 
 USE [Pronto]
