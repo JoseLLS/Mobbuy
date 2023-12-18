@@ -1,0 +1,2 @@
+ALTER TABLE [MovTrn01]
+ADD [MovTrnTavNum] SMALLINT    NULL;
