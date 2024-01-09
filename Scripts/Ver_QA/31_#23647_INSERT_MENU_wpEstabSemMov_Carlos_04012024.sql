@@ -24,7 +24,7 @@ INSERT INTO sse2_ung_mod (ung2cod, mod2id)
 VALUES (18, 'wpEstabSemMov_Grid')
 
 INSERT INTO sse2_grp_mod
-VALUES (18, 'CADASTROS', 'wpEstabSemMov_Grid')
+VALUES (18, 'ADM', 'wpEstabSemMov_Grid')
 /*********************************************************************************************************************/
 USE CREDPAG
 
