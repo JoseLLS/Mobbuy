@@ -39,28 +39,32 @@ BEGIN
 					SUBSTRING(cast(V.VanTrnHra as varchar(6)),5, 2)) 'HraVenda',
 			M.MovTrnDta 'DtaCredito',
 			M.MovTrnNsu 'NSU',
-			M.MovTrnAutCod 'Autorização',
+			M.MovTrnAutCod 'AutorizaÃ§Ã£o',
 			IIF(M.MovTrnParQtd = 0, 1, M.MovTrnParQtd) 'Plano',
 			CASE
 				WHEN M.MovTrnBan = 'V' THEN '1'
 				WHEN M.MovTrnBan = 'M' THEN '2'
-				WHEN M.MovTrnBan = 'E' THEN '3'
+				WHEN M.MovTrnBan = 'E' THEN '7'
 			ELSE '0'
 			END 'Bandeira',
 			CASE
-				WHEN M.MOVTRNTIPPRD = 'D' THEN '1'
-				WHEN M.MOVTRNTIPPRD = 'C' THEN '2'
+				WHEN M.MOVTRNTIPPRD = 'D' AND M.MovTrnBan = 'V' THEN '2'
+				WHEN M.MOVTRNTIPPRD = 'C' AND M.MovTrnBan = 'V' THEN '1'
+				WHEN M.MOVTRNTIPPRD = 'D' AND M.MovTrnBan = 'M' THEN '343'
+				WHEN M.MOVTRNTIPPRD = 'C' AND M.MovTrnBan = 'M' THEN '6'
+				WHEN M.MOVTRNTIPPRD = 'D' AND M.MovTrnBan = 'E' THEN '197'
+				WHEN M.MOVTRNTIPPRD = 'C' AND M.MovTrnBan = 'E' THEN '196'
 			ELSE '0'
 			END 'Produto',
 			V.VanTrnVlr 'Valor Venda',
 			M.MOVTRNVLR 'Valor Bruto',
 			E.ESTCPFCNPJ 'Cod. Estabelecimento',
-			M.MOVTRNVLRLIQEST 'Valor Líquido',
+			M.MOVTRNVLRLIQEST 'Valor LÃ­quido',
 			'1' 'Status',
 			'1' 'Modo Captura',
 			IIF(M.MovTrnParQtd = 0, 1, M.MovTrnParQtd) 'Parcela',
 			(M.MOVTRNVLR - M.MOVTRNVLRLIQEST) 'Valor Taxa',
-			E.EstAge1 'Agência',
+			E.EstAge1 'AgÃªncia',
 			E.EstBco1 'Banco',
 			E.EstCco1 'Conta',
 			'1' 'Ststus Enviado' /*Pendente*/
