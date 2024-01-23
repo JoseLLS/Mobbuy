@@ -16,13 +16,13 @@ CREATE TABLE [Robo] (
      PRIMARY KEY ( [RoboId] ));
 	 
 INSERT INTO Robo
-VALUES('Rede Captura', 'Data Inicial', NULL, 'ADMIN', NULL, GETDATE(), NULL, 1, 'pronto_redecaptura.sh');
+VALUES('Rede Captura', 'pronto_redecaptura.sh', 'Data Inicial', NULL, 'ADMIN', NULL, GETDATE(), NULL, 1);
 
 INSERT INTO Robo
-VALUES('Importar Trn', NULL, NULL, 'ADMIN', NULL, GETDATE(), NULL, 1, 'importar_trn_rede_cap.sh');
+VALUES('Importar Trn', 'importar_trn_rede_cap.sh', NULL, NULL, 'ADMIN', NULL, GETDATE(), NULL, 1);
 
 INSERT INTO Robo
-VALUES('Integração Manager', 'Data Inicial', 'Data Final', 'ADMIN', NULL, GETDATE(), NULL, 1, 'integracao_manager.sh');
+VALUES('Integração Manager', 'integracao_manager.sh', 'Data Inicial', 'Data Final', 'ADMIN', NULL, GETDATE(), NULL, 1);
 
 INSERT INTO Robo
-VALUES('Robô Vero', NULL, NULL, 'ADMIN', NULL, GETDATE(), NULL, 1, 'robo_vero.sh');
+VALUES('Robô Vero', 'robo_vero.sh', NULL, NULL, 'ADMIN', NULL, GETDATE(), NULL, 1);
