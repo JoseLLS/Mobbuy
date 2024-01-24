@@ -4,5 +4,6 @@ CREATE TABLE [tmpEstabSemMov] (
   [tmpEstabSemMovDta]    DATETIME    NOT NULL,
   [tmpEstabSemMovEstCod] INT	     NULL,
   [tmpEstabSemMovParCom] CHAR(100)    NULL,
+  [tmpEstabSemMovPacCod] INT	     NULL,
   [tmpEstabSemMovQtdPos] SMALLINT    NULL,
      PRIMARY KEY ( [tmpEstabSemMovEstab],[tmpEstabSemMovDta] ))
