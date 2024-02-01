@@ -1,18 +1,13 @@
---use Banese
---use Credinov
---use Credpag
---use Estbank
---use pronto
---use Smartpagamentos
+Use pronto --RODAR SOMENTE PRONTO (CARLOS - 01/02/2024)
 
 INSERT INTO PARSIS VALUES(
 'FUNC_MOBBUY',
 'Funcionalidades exclusivas para funcionários ligados à Mobbuy',
 'CA',
-1,
+100,
 NULL,
 'N',
-'S',
+'025ADM|025BORGES|025MBARB|025MTERESA|025MJOSE|025LEONARD|025CARLOSP',
 '025CARLOSP',
 '2024-02-01',
 NULL,
