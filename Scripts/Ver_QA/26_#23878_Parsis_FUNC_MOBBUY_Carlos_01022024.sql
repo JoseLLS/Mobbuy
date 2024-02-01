@@ -7,7 +7,7 @@
 
 INSERT INTO PARSIS VALUES(
 'FUNC_MOBBUY',
-'Funcionalidades exclusivas para funcion·rios ligados ‡ Mobbuy',
+'Funcionalidades exclusivas para funcion√°rios ligados √† Mobbuy',
 'CA',
 1,
 NULL,
