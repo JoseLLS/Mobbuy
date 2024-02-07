@@ -1,0 +1,18 @@
+/* VERSIONAMENTO DE SCRIPTS */
+
+INSERT INTO SQLHistorico
+VALUES ('3.6.32','2.5.33',GETDATE());
+
+/* TAREFA #23900 - LEONARDO */
+
+CREATE TABLE [CercEnvia] (
+  [CercEnviaId]        INT    NOT NULL,
+  [CercEnviaDescricao] VARCHAR(50)    NOT NULL,
+     PRIMARY KEY ( [CercEnviaId] ))
+
+ALTER TABLE [EST]
+ADD [CercEnviaId] INT    NULL
+CREATE NONCLUSTERED INDEX [IEST8] ON [EST] (
+      [CercEnviaId])
+ALTER TABLE [EST]
+ ADD CONSTRAINT [IEST8] FOREIGN KEY ( [CercEnviaId] ) REFERENCES [CercEnvia]([CercEnviaId])
