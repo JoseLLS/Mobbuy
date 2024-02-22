@@ -11,7 +11,7 @@ AS
 SELECT
 	NEWID() AS  'vwPartidasAbertoID',
 	M.MovTrnNsu AS 'vwPartidasAbertoNSU',
-    V.ESTCOD AS 'vwPartidasAbertoEstCod',
+    	V.ESTCOD AS 'vwPartidasAbertoEstCod',
 	E.EstAplPsq AS 'vwPartidasAbertoEstApl',
 	V.VlpBan AS 'vwPartidasAbertoBanCod',
 	CASE
@@ -32,20 +32,20 @@ SELECT
 	V.VlpVlrPag AS 'vwPartidasAbertoVlrVenda',
 	A.AdqNom AS 'vwPartidasAbertoAdqNom',
 	M.MovTrnAutCod AS 'vwPartidasAbertoAutorizacao',
-	M.MovTrnCod AS 'vwPartidasAbertoMovTrnCod',
+	M.MovTrnCod AS 'vwPartidasAbertoTrnCod',
 	CASE
 		WHEN M.MovTrnCod = 'AJ' THEN 'Ajuste (AJ)'
 		WHEN M.MovTrnCod = 'CC'	THEN 'Cancelamento (CC)'
-		WHEN M.MovTrnCod = 'CV'	THEN 'Crédito a vista (CV)'
-		WHEN M.MovTrnCod = 'PS' THEN 'Prestação de serviço (PS)'
+		WHEN M.MovTrnCod = 'CV'	THEN 'CrÃ©dito a vista (CV)'
+		WHEN M.MovTrnCod = 'PS' THEN 'PrestaÃ§Ã£o de serviÃ§o (PS)'
 	END AS 'vwPartidasAbertoTransacao',
-	M.MovTrnTipPrd AS 'vwPartidasAbertoMovTrnTipPrd',
+	M.MovTrnTipPrd AS 'vwPartidasAbertoTrnPrd',
 	CASE 
-		WHEN M.MovTrnTipPrd = 'C' THEN 'Crédito'
-		WHEN M.MovTrnTipPrd = 'D' THEN 'Débito'
+		WHEN M.MovTrnTipPrd = 'C' THEN 'CrÃ©dito'
+		WHEN M.MovTrnTipPrd = 'D' THEN 'DÃ©bito'
 		WHEN M.MovTrnTipPrd = 'V' THEN 'Voucher'
 		WHEN M.MovTrnTipPrd = 'O' THEN 'Outros'
-		WHEN M.MovTrnTipPrd = 'S' THEN 'Prestação de Serviço'
+		WHEN M.MovTrnTipPrd = 'S' THEN 'PrestaÃ§Ã£o de ServiÃ§o'
 		WHEN M.MovTrnTipPrd = 'P' THEN 'Pix'
 	END  AS 'vwPartidasAbertoProduto',
 	M.MovTrnDta AS 'vwPartidasAbertoDtaVenda'
