@@ -443,3 +443,13 @@ WHERE VLPSTSPAG = 13
 GO
 
 
+ALTER TABLE VAN02 ADD VanWbsAdqStatus VARCHAR(2) NULL;
+ALTER TABLE EST ADD EstVar BIT NULL;
+
+insert into VlpStatusPag values (13, 'Bloqueado Pendente Conciliacao')
+
+/*APENAS BANESE*/
+USE Banese
+GO
+update ADQ0001 set AdqIndRmbRedCap = 'S', AdqRedCap = 'Global' where AdqCod = 1
+/**/
