@@ -45,6 +45,15 @@ CREATE NONCLUSTERED INDEX [IOCORRENCIA] ON [Ocorrencia] (
       [EstCod])
 ALTER TABLE [Ocorrencia]
  ADD CONSTRAINT [IOCORRENCIA] FOREIGN KEY ( [EstCod] ) REFERENCES [Est]([EstCod]);
+
+ ALTER TABLE [RegraMonitor]
+ADD [RegraMonitorBloqTran] NVARCHAR(1)    NOT NULL CONSTRAINT RegraMonitorBloqTranRegraMonitor_DEFAULT DEFAULT ''
+
+ALTER TABLE [RegraMonitor]
+DROP CONSTRAINT RegraMonitorBloqTranRegraMonitor_DEFAULT
+
+INSERT INTO Parametro
+VALUES ('URL_BLOQ_TRN_COL', 'URL da API para bloquear transações', 'https://sistemas.mobbuyapp.com/prontoev15/rest/API_BloqueiaTransacao');
 	 
 USE [MonitorPronto]
 GO
