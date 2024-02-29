@@ -3,7 +3,7 @@
 USE Pronto;
 
 INSERT INTO PARSIS
-VALUES('MNT_INSEREESTAPI','Url do Monitor da API InsereEstAPI','VA',100,NULL,'N','https://app-dev.semprepronto.com.br/MonitoramentoPronto','ADMIN','2023-11-10 09:19:09.000',NULL,NULL,0)
+VALUES('MNT_INSEREESTAPI','Url do Monitor da API InsereEstAPI','VA',100,NULL,'N','https://app-dev.semprepronto.com.br/MonitoramentoPronto/rest/InsereEstAPI','ADMIN','2023-11-10 09:19:09.000',NULL,NULL,0)
 
 --Banco MonitorPronto
 
