@@ -2,4 +2,4 @@ CLASSPATH="../lib/activation-1.1.jar:../lib/annotations-api.jar:../lib/asm-3.1.j
 
 cd /usr/local/tomcat/webapps/pronto/WEB-INF/classes
 
-/usr/local/openjdk-8/bin/java -classpath $CLASSPATH amonitorinsereest >> /mnt/home1/sistema/logs/monitorinsereest_pronto.txt
+/usr/local/openjdk-8/bin/java -classpath $CLASSPATH amonitorinsereest >> /mnt/home1/sistema/logs/monitor_insereest.txt
