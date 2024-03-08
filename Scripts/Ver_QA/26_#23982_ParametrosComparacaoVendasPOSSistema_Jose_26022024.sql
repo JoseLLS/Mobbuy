@@ -12,4 +12,4 @@ VALUES ('COMPARA_POS_EMAIL','E-mails para envio de alerta de bloqueio de transaç
 
 INSERT INTO PARSIS
 VALUES ('COMPARA_POS_EMAIL_MSG','Corpo do e-mail para envio de alerta de bloqueio de transações.','VA',200,NULL,'N',
-'<p>Realizamos o bloqueio das transações do EC [EC] e POS [POS] devido a divergência de informações com o Manager.<br>Favor verificar.</p>','ADMIN',GETDATE(),NULL,NULL,0);
+'<p>Realizamos o bloqueio das transações do EC [EC] e POS [POS] devido a divergência de informações com o sistema Retaguarda.<br>Favor verificar.</p>','ADMIN',GETDATE(),NULL,NULL,0);
