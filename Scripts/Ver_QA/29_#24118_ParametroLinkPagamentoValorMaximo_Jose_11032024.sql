@@ -1,0 +1,4 @@
+/* TAREFA #24118 - JOSÉ */
+
+INSERT INTO PARSIS
+VALUES ('LINKPAGAMENTO_VALOR','Valor máximo do link de pagamento','NU','15',NULL,'N','100000','ADMIN',GETDATE(),NULL,NULL,0);
