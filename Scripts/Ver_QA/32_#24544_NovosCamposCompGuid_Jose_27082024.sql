@@ -1,0 +1,5 @@
+/* TAREFA #24544 - JOSÉ */
+
+ALTER TABLE [VLRPAG]
+ADD [VlpCompGuidPai] VARCHAR(100)    NULL,
+    [VlpCompGuid] VARCHAR(100)    NULL
