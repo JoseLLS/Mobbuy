@@ -1,5 +1,8 @@
 /* TAREFA #24544 - JOSÉ */
 
+INSERT INTO TIPDSP
+VALUES (8, 'Ajuste Manual á Crédito','S','SISTEMA',GETDATE(),'','1753-01-01 00:00:00.000');
+
 ALTER TABLE [VLRPAG]
 ADD [VlpCompGuidPai] VARCHAR(100)    NULL,
-    [VlpCompGuid] VARCHAR(100)    NULL
+    [VlpCompGuid] VARCHAR(100)    NULL;
