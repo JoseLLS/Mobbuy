@@ -5,8 +5,12 @@ SET ParCon = 'https://sistemas.mobbuyapp.com/MonitoramentoPermite/rest/Alerta_Pe
 WHERE ParCod = 'API_MONITOR_PERC_ESTAT'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/permiteev15/rest/api_calcularesultadosimulador'
+SET ParCon = 'https://sistemas.mobbuyapp.com/smartpagamentosev15/rest/api_calcularesultadosimulador'
 WHERE ParCod = 'API_SIMULADOR'
+
+UPDATE PARSIS
+SET ParCon = 'S'
+WHERE ParCod = 'HOMOLOG'
 
 UPDATE PARSIS
 SET ParCon = 'https://sistemas.mobbuyapp.com/MonitoramentoPermite/rest/InsereEstAPI'
@@ -25,15 +29,15 @@ SET ParCon = 'sistemas.mobbuyapp.com'
 WHERE ParCod = 'PORTAL_EC_RESPOSITO_HOST'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/permiteev15/rest/PosTokenInstWS'
+SET ParCon = 'https://sistemas.mobbuyapp.com/smartpagamentosev15/rest/PosTokenInstWS'
 WHERE ParCod = 'POS_TOKEN_INST_WS'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/permiteev15'
+SET ParCon = 'https://sistemas.mobbuyapp.com/smartpagamentosev15'
 WHERE ParCod = 'URL_GX16'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/permiteev15/rest/'
+SET ParCon = 'https://sistemas.mobbuyapp.com/smartpagamentosev15/rest/'
 WHERE ParCod = 'URL_GX16_API'
 
 UPDATE PARSIS
@@ -41,11 +45,11 @@ SET ParCon = 'https://sistemas.mobbuyapp.com/MonitoramentoPermite/rest/InsereTra
 WHERE ParCod = 'URL_INSERE_TRN_MONITOR'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/permiteparcom'
+SET ParCon = 'https://sistemas.mobbuyapp.com/smartpagamentosparcom'
 WHERE ParCod = 'URL_PARCEIRO'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/permite/servlet/iface_resetsenha?'
+SET ParCon = 'https://sistemas.mobbuyapp.com/smartpagamentos/servlet/iface_resetsenha?'
 WHERE ParCod = 'URL_RESET_SENHA'
 
 UPDATE PARSIS
@@ -53,7 +57,7 @@ SET ParCon = 'sistemas.mobbuyapp.com'
 WHERE ParCod = 'URL_SISTEMA'
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/permiteev15/rest/api_auth_cerc'
+SET ParCon = 'https://sistemas.mobbuyapp.com/smartpagamentosev15/rest/api_auth_cerc'
 WHERE ParCod = 'URL_TOKEN_CERC'
 
 UPDATE PARSIS
