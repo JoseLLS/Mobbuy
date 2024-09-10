@@ -35,3 +35,8 @@ VALUES (25, 'COMPLIANCE NOVO', 'HLogCadComp_Grid');
 
 INSERT INTO sse2_grp_mod
 VALUES (25, 'ADM', 'HLogCadComp_Grid');
+
+/* SEM TAREFA - JOSÉ */
+
+INSERT INTO PARSIS
+VALUES ('BANCO_TELA','"S" = Roda rotina de banco pela tela','VA',1,NULL,'N','N','ADMIN',GETDATE(),NULL,NULL,0)
