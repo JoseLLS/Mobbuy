@@ -1,0 +1,2 @@
+ALTER TABLE [EST]
+ADD [EstTxAntCompDeb] SMALLMONEY    NULL;
