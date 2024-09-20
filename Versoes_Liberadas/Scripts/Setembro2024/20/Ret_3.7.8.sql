@@ -1,0 +1,6 @@
+INSERT INTO SQLHistorico
+VALUES ('3.7.8','2.5.46',GETDATE());
+
+ALTER TABLE [EST]
+ADD [EstTxAntCompDeb] SMALLMONEY    NULL;
+
