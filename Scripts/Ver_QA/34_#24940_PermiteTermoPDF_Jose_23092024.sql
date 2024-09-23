@@ -1,0 +1,20 @@
+/* TAREFA #24940 - JOSÉ */
+
+ALTER TABLE [Termo]
+ADD [TermoPDF] VARCHAR(MAX)    NULL,
+	[TermoPDFExt] VARCHAR(10)    NULL,
+	[TermoPDFNome] VARCHAR(100)    NULL,
+	[TermoEmlTxt] VARCHAR(MAX)    NULL;
+
+CREATE TABLE [MPLANEXO] ( 
+  [MPLSeq]         INT    NOT NULL, 
+  [MPLAnexoId]     INT    NOT NULL, 
+  [MPLAnexoArq]    VARCHAR(MAX)    NULL,
+  [MPLAnexoArqExt] VARCHAR(10)    NULL,
+  [MPLAnexoArqNome] VARCHAR(100)    NULL,
+  [MPLAnexoUsuInc] CHAR(20)    NULL, 
+  [MPLAnexoDtaInc] DATETIME    NULL, 
+     PRIMARY KEY ( [MPLSeq],[MPLAnexoId] ));
+	 
+ALTER TABLE [MPLANEXO] 
+ ADD CONSTRAINT [IMPLANEXO1] FOREIGN KEY ( [MPLSeq] ) REFERENCES [MPL]([MPLSeq]);
