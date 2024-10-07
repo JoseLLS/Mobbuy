@@ -1,0 +1,7 @@
+/* TAREFA #25203 - JOSÉ */
+
+ALTER TABLE [EST]
+ADD [EstSlcNuclea] BIT    NULL;
+
+ALTER TABLE [ARQBAN]
+ADD [ArbSlcTip] CHAR(2)    NULL;
