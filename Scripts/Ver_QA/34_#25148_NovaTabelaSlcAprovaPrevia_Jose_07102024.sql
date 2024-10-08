@@ -13,3 +13,6 @@ CREATE TABLE [SLCAPROVAPREVIA] (
   [SlcUsuarioInclusao] VARCHAR(40)    NULL, 
   [SlcDataAlteracao]   DATETIME    NULL, 
      PRIMARY KEY ( [SlcAprovaPreviaId] ));
+
+ALTER TABLE [ARQBAN]
+ADD [ArbArqNom] VARCHAR(50)    NULL;
