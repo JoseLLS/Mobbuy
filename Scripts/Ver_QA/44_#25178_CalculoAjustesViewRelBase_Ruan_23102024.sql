@@ -38,8 +38,7 @@ WHERE MovTrnCod IN ('CV', 'CC', 'AJ')  -- Incluímos o 'AJ' no filtro
 
 GROUP BY M.EstCod, E.EstNomFan, E.EstAplPsq, E.EstCpfCnpj, E.EstTip, E.EstSegmento, M.MovTrnDta, M.MovtrnAnt,
          M.MovTrnVlr, M.MovTrnVlrLiqEst, M.MovTrnGbpVlrTxaInt, M.MovTrnGbpVlrTxaAnt
-GO
-SELECT TOP (1000) * from RelatorioBaseTributacao where RelBaseTribValorAjustes > 0;
+
 GO
 
 Use [Permite]
@@ -83,8 +82,7 @@ WHERE MovTrnCod IN ('CV', 'CC', 'AJ')  -- Incluímos o 'AJ' no filtro
 GROUP BY M.EstCod, E.EstNomFan, E.EstAplPsq, E.EstCpfCnpj, E.EstTip, E.EstSegmento, M.MovTrnDta, M.MovtrnAnt,
          M.MovTrnVlr, M.MovTrnVlrLiqEst, M.MovTrnGbpVlrTxaInt, M.MovTrnGbpVlrTxaAnt
 GO
-SELECT TOP (1000) * from RelatorioBaseTributacao where RelBaseTribValorAjustes > 0;
-GO
+
 
 Use [NeoPagamentos]
 GO
@@ -127,8 +125,7 @@ WHERE MovTrnCod IN ('CV', 'CC', 'AJ')  -- Incluímos o 'AJ' no filtro
 GROUP BY M.EstCod, E.EstNomFan, E.EstAplPsq, E.EstCpfCnpj, E.EstTip, E.EstSegmento, M.MovTrnDta, M.MovtrnAnt,
          M.MovTrnVlr, M.MovTrnVlrLiqEst, M.MovTrnGbpVlrTxaInt, M.MovTrnGbpVlrTxaAnt
 GO
-SELECT TOP (1000) * from RelatorioBaseTributacao where RelBaseTribValorAjustes > 0;
-GO
+
 
 Use [EstBank]
 GO
@@ -171,8 +168,7 @@ WHERE MovTrnCod IN ('CV', 'CC', 'AJ')  -- Incluímos o 'AJ' no filtro
 GROUP BY M.EstCod, E.EstNomFan, E.EstAplPsq, E.EstCpfCnpj, E.EstTip, E.EstSegmento, M.MovTrnDta, M.MovtrnAnt,
          M.MovTrnVlr, M.MovTrnVlrLiqEst, M.MovTrnGbpVlrTxaInt, M.MovTrnGbpVlrTxaAnt
 GO
-SELECT TOP (1000) * from RelatorioBaseTributacao where RelBaseTribValorAjustes > 0;
-GO
+
 
 
 Use [CredPag]
@@ -216,8 +212,7 @@ WHERE MovTrnCod IN ('CV', 'CC', 'AJ')  -- Incluímos o 'AJ' no filtro
 GROUP BY M.EstCod, E.EstNomFan, E.EstAplPsq, E.EstCpfCnpj, E.EstTip, E.EstSegmento, M.MovTrnDta, M.MovtrnAnt,
          M.MovTrnVlr, M.MovTrnVlrLiqEst, M.MovTrnGbpVlrTxaInt, M.MovTrnGbpVlrTxaAnt
 GO
-SELECT TOP (1000) * from RelatorioBaseTributacao where RelBaseTribValorAjustes > 0;
-GO
+
 
 Use [Credinov]
 GO
@@ -259,6 +254,4 @@ WHERE MovTrnCod IN ('CV', 'CC', 'AJ')  -- Incluímos o 'AJ' no filtro
 
 GROUP BY M.EstCod, E.EstNomFan, E.EstAplPsq, E.EstCpfCnpj, E.EstTip, E.EstSegmento, M.MovTrnDta, M.MovtrnAnt,
          M.MovTrnVlr, M.MovTrnVlrLiqEst, M.MovTrnGbpVlrTxaInt, M.MovTrnGbpVlrTxaAnt
-GO
-SELECT TOP (1000) * from RelatorioBaseTributacao where RelBaseTribValorAjustes > 0;
 GO
