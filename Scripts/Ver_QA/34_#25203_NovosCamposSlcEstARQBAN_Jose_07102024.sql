@@ -5,3 +5,6 @@ ADD [EstSlcNuclea] BIT    NULL;
 
 ALTER TABLE [ARQBAN]
 ADD [ArbSlcTip] CHAR(2)    NULL;
+
+ALTER TABLE [TblBan]
+ADD [TblBanSlcAtivo] CHAR(1)    NULL;
