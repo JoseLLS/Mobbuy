@@ -4,7 +4,8 @@ ALTER TABLE [EST]
 ADD [EstSlcNuclea] BIT    NULL;
 
 ALTER TABLE [ARQBAN]
-ADD [ArbSlcTip] CHAR(2)    NULL;
+ADD [ArbSlcTip] CHAR(2)    NULL,
+	[ArbPgtoEfeito] CHAR(1)    NULL;
 
 ALTER TABLE [TblBan]
 ADD [TblBanSlcAtivo] CHAR(1)    NULL,
