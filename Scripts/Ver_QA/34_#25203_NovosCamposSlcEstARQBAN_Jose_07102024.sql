@@ -7,4 +7,5 @@ ALTER TABLE [ARQBAN]
 ADD [ArbSlcTip] CHAR(2)    NULL;
 
 ALTER TABLE [TblBan]
-ADD [TblBanSlcAtivo] CHAR(1)    NULL;
+ADD [TblBanSlcAtivo] CHAR(1)    NULL,
+	[TblBanCodArranjo] CHAR(3)    NULL;
