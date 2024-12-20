@@ -33,7 +33,7 @@ SET ParCon = 'https://sistemas.mobbuyapp.com/credpagev15/rest/PosTokenInstWS'
 WHERE ParCod = 'POS_TOKEN_INST_WS';
 
 UPDATE PARSIS
-SET ParCon = 'https://sistemas.mobbuyapp.com/credpagcredpagev15'
+SET ParCon = 'https://sistemas.mobbuyapp.com/credpagev15'
 WHERE ParCod = 'URL_GX16';
 
 UPDATE PARSIS
