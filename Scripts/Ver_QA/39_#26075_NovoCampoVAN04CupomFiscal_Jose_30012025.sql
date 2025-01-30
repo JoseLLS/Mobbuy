@@ -1,0 +1,4 @@
+/* TAREFA #26075 - JOSÉ */
+
+ALTER TABLE [VAN04]
+ADD [VanTrnCupFis] VARCHAR(32)    NULL;
