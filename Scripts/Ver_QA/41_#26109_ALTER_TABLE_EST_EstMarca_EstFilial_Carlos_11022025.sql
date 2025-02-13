@@ -1,5 +1,0 @@
-USE PERMITE
-
-ALTER TABLE [EST]
-ADD [EstFilial] INT    NULL,
-    [EstMarca] INT    NULL
